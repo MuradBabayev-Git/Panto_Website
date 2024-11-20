@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panto</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="js.js">
+</head>
+<body>
+  <header>
+    <h1 class="panto">Panto</h1>
+    <nav>
+      <div class="dropdown">
+        <a href="https://www.ikea.com" target="_blank">Furniture <span class="arrow"></span></a>
+        <div class="dropdown-menu">
+          <a href="https://www.ikea.com" target="_blank">IKEA</a>
+          <a href="https://www.wayfair.com" target="_blank">Wayfair</a>
+        </div>
+      </div>
+      <a href="https://www.amazon.com" target="_blank">Shop</a>
+      <a href="https://en.wikipedia.org/wiki/About_us" target="_blank">About Us</a>
+      <a href="https://www.contactus.com" target="_blank">Contact</a>
+    </nav>
+    <div class="cart">
+      <a href="https://www.ebay.com" target="_blank">
+        <div class="cart-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Cart Icon" width="20" height="20">
+        </div>
+      </a>
+      <div class="cart-count">0</div>
+    </div>
+  </header>
+  <script>
+   // GSAP Animations 
+gsap.from(".panto", { opacity: 0, y: -50, duration: 1, delay: 0.5 });
+gsap.to("nav", { opacity: 1, duration: 1, delay: 1 });
+gsap.from("nav a", { opacity: 0, x: -50, duration: 1, stagger: 0.2, delay: 1.5 });
+gsap.from(".cart", { opacity: 0, x: 100, duration: 1, delay: 1.5 });
+
+// Dropdown Animation
+const dropdown = document.querySelector('.dropdown');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+
+dropdown.addEventListener('mouseenter', () => {
+  gsap.to(dropdownMenu, { opacity: 1, y: 10, duration: 0.3, display: 'block' });
+});
+
+dropdown.addEventListener('mouseleave', () => {
+  gsap.to(dropdownMenu, { opacity: 0, y: -10, duration: 0.3, display: 'none' });
+});
+
+// Shake effect for the cart count when hovered over the cart icon
+const cartIcon = document.querySelector('.cart-icon');
+const cartCount = document.querySelector('.cart-count');
+
+cartIcon.addEventListener('mouseenter', () => {
+  gsap.to(cartCount, {
+    x: 10, 
+    duration: 0.1, 
+    repeat: 10, 
+    yoyo: true, 
+    ease: "linear",
+    onComplete: () => {
+      // Reset the position of the cart count after shaking
+      gsap.to(cartCount, {
+        x: 0, // Return to original position
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    }
+  });
+});
+
+// GSAP Animations for Hero Text
+gsap.from(".hedh1s", { 
+  opacity: 0, 
+  y: -50, 
+  duration: 1, 
+  delay: 1, 
+  ease: "power4.out"
+});
+
+gsap.from(".hedps", { 
+  opacity: 0, 
+  y: 50, 
+  duration: 1, 
+  delay: 1.5, 
+  ease: "power4.out"
+});
+// GSAP Animations for Search Bar Section
+gsap.from(".search-bar-container", { 
+  opacity: 0, 
+  y: 50, 
+  duration: 1, 
+  delay: 2, 
+  ease: "power4.out"
+});
+
+// GSAP Animation for Search Input on Focus
+const searchInput = document.querySelector('.search-input');
+
+searchInput.addEventListener('focus', () => {
+  gsap.to(searchInput, {
+    scale: 1.05, // Slightly scale up the input field
+    borderColor: '#E58411', // Change border color on focus
+    duration: 0.3,
+    ease: "power2.out"
+  });
+});
+
+searchInput.addEventListener('blur', () => {
+  gsap.to(searchInput, {
+    scale: 1, // Reset to original scale
+    borderColor: '#E58411', // Keep border color after focus
+    duration: 0.3,
+    ease: "power2.out"
+  });
+});
+
+
+
+  </script>
+  
+</body>
+</html>   
