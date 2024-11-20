@@ -232,3 +232,77 @@ nav a:active {
 .search-bar-container .search-input::placeholder {
   color: #B6B7B8;
 }
+@media (min-width: 555px) and (max-width: 670px) {
+  /* Increase space for Panto and adjust other layout elements */
+  
+  .panto {
+    left: 60px; /* A little more space between "Panto" and the left edge */
+    font-size: 22px; /* Slightly smaller font size for the title on medium screens */
+  }
+
+  nav {
+    gap: 30px; /* Reduce gap between nav items to fit the smaller screen width */
+  }
+
+  .cart {
+    right: 60px; /* Reduce space for the cart icon on medium screens */
+  }
+
+  nav a {
+    font-size: 14px; /* Smaller font size for navigation links */
+  }
+
+  /* Dropdown Menu Adjustments */
+  .dropdown-menu {
+    padding: 8px 0; /* Slightly smaller padding for the dropdown */
+  }
+
+  .dropdown-menu a {
+    padding: 6px 20px; /* Adjust padding inside dropdown items */
+  }
+  
+  /* Optionally, you could change the size of the cart icon and its count for a better fit */
+  .cart-icon {
+    width: 35px; /* Reduce cart icon size */
+    height: 35px; /* Maintain proportionality */
+  }
+
+  .cart-count {
+    font-size: 10px; /* Smaller cart count font size */
+    padding: 1px 5px; /* Smaller cart count size */
+  }
+}
+
+@media (min-width: 500px) and (max-width: 555px) {
+  header {
+    height: 70px; /* Reduce header height for smaller screens */
+    padding-left: 10px; /* Adjust padding to fit better */
+  }
+
+  .panto {
+    left: 50px; /* Reduce left margin to fit smaller screens */
+    font-size: 20px; /* Slightly smaller font for the title */
+  }
+
+  nav {
+    gap: 20px; /* Reduce spacing between navigation links */
+  }
+
+  nav a {
+    font-size: 14px; /* Smaller font size for navigation links */
+  }
+
+  .cart {
+    right: 50px; /* Adjust position of the cart icon */
+  }
+
+  .cart-icon {
+    width: 30px; /* Smaller cart icon size */
+    height: 30px;
+  }
+
+  .cart-count {
+    font-size: 10px; /* Smaller cart count font size */
+    padding: 1px 4px; /* Adjust padding for cart count */
+  }
+}
