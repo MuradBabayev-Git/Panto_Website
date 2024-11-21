@@ -1,308 +1,343 @@
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* Disable horizontal scroll */
-}
-
-header {
-  background: linear-gradient(90deg, #282828 0%, #333 100%);
-  
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding-left: 20px; /* Added padding to create more space on the left */
-}
-
-.panto {
-  position: absolute;
-  left: 70px; /* Increased the left margin to add more space */
-  color: white;
-  font-size: 24px;
-  width: 78px;
-height: 35px;
-opacity: 0px;
-
-}
-
-nav {
-  position: absolute;
-  display: flex;
-  gap: 50px;
-  align-items: center;
-  opacity: 0; /* Initially hidden */
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-nav a:hover {
-  color: #E58411;  /* Updated color */
-  transform: scale(1.1);
-  transition: transform 0.3s ease-in-out;
-}
-
-nav a:active {
-  transform: scale(0.9);
-}
-
-.dropdown {
-  display: flex;
-  align-items: center;
-}
-
-.dropdown .arrow {
-  width: 7px;
-  height: 7px;
-  border: solid white;
-  border-width: 0 1.5px 1.5px 0;
-  display: inline-block;
-  transform: rotate(45deg);
-  margin-top: 1px;
-  transition: transform 0.3s ease;
-}
-
-.dropdown:hover .arrow {
-  transform: rotate(90deg);
-}
-
-.cart {
-  position: absolute;
-  right: 70px; /* Increased the right margin to add more space */
-  display: flex;
-  align-items: center;
-}
-
-.cart-icon {
-  width: 40px;
-  height: 40px;
-  background-color: white;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.cart-icon:hover {
-  transform: scale(1.1);
-  rotate(10deg); /* Optional: Add a bit of rotation on hover for extra effect */
-}
-
-.cart-count {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: #E58411;  /* Updated background color */
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 50%;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #333;
-  padding: 10px 0;
-  border-radius: 5px;
-}
-
-.dropdown-menu a {
-  padding: 8px 20px;
-  display: block;
-  color: white;
-  text-decoration: none;
-}
-
-.dropdown-menu a:hover {
-  background-color: #444;
-}
-
-
-
-
-
-.content {
-  text-align: center;
-  max-width: 100%; /* Ensure the content doesn't exceed the viewport width */
-  height: 500px;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.8);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.hedh1s {
-  font-size: 4em;
-  margin-bottom: 10px;
-  Font:Gilroy-Bold;
-  color: white;
-}
-
-.hedps {
-  font-size: 1.4em;
-  line-height: 1.6;
-  font-family: Gilroy-Regular;
-  color: #B6B7B8;
-
-}
-
-
-/* Tablet view */
-@media (max-width: 1024px) {
-  .content {
-    padding: 15px; /* Adjust padding */
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
   }
 
-  .hedh1s {
-    font-size: 2.5em; /* Reduce hero text size */
-  }
-
-  .hedps {
-    font-size: 1.2em;
-  }
-
-  .cart {
-    right: 50px; /* Adjust cart position */
-  }
-
-  .cart-icon {
-    width: 35px; /* Adjust cart icon size */
-    height: 35px;
-  }
-
-  .cart-count {
-    font-size: 12px; /* Adjust font size for cart count */
-  }
+  .Main {
+    background-image: url('img/DALL·E\ 2024-11-21\ 12.32.23\ -\ A\ modern\ and\ minimalist\ living\ room\ featuring\ a\ large\ orange\ sofa\ in\ the\ center\,\ surrounded\ by\ plants\ on\ the\ sides.\ In\ front\ of\ the\ sofa\,\ there\ is\ a\ s.webp');
+    background-size: cover;  /* Изображение заполняет весь контейнер */
+    background-position: center; /* Центрирование изображения */
+    background-repeat: no-repeat; /* Отключение повторов изображения */
+    height: 100vh; /* Высота контейнера, например, на весь экран */
 }
 
-/* Phone view */
-@media (max-width: 600px) {
-  .content {
-    padding: 10px; /* Adjust padding */
+
+
+  header {
+    /* background: linear-gradient(90deg, #282828 0%, #333 100%); */
+    
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-left: 20px; /* Added padding to create more space on the left */
   }
 
-  .hedh1s {
-    font-size: 2em; /* Further reduce hero text size */
-  }
-
-  .hedps {
-    font-size: 1em;
-  }
-}
-
-/* Search Bar Styling */
-.search-bar-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-  position: relative; /* To position the icon inside the input */
-}
-
-.search-input {
-  width: 300px;
-  height: 40px;
-  padding: 10px;
-  font-size: 16px;
-  border: 2px solid #E58411; /* Border color */
-  border-radius: 30px; /* Increased border radius */
-  background-color: #333;
-  color: white;
-  padding-right: 40px; /* Space for the icon inside */
-  transition: background-color 0.3s ease;
-}
-
-.search-input:focus {
-  background-color: #444;
-  outline: none;
-}
-
-.search-bar-container .search-input::placeholder {
-  color: #B6B7B8;
-}
-@media (min-width: 555px) and (max-width: 670px) {
-  /* Increase space for Panto and adjust other layout elements */
-  
   .panto {
-    left: 60px; /* A little more space between "Panto" and the left edge */
-    font-size: 22px; /* Slightly smaller font size for the title on medium screens */
+    position: absolute;
+    left: 70px; /* Increased the left margin to add more space */
+    color: white;
+    font-size: 24px;
+    width: 78px;
+  height: 35px;
+  opacity: 0px;
+
   }
 
   nav {
-    gap: 30px; /* Reduce gap between nav items to fit the smaller screen width */
-  }
-
-  .cart {
-    right: 60px; /* Reduce space for the cart icon on medium screens */
+    position: absolute;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    opacity: 0; /* Initially hidden */
   }
 
   nav a {
-    font-size: 14px; /* Smaller font size for navigation links */
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 
-  /* Dropdown Menu Adjustments */
+  nav a:hover {
+    color: #E58411;  /* Updated color */
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  nav a:active {
+    transform: scale(0.9);
+  }
+
+  .dropdown {
+    display: flex;
+    align-items: center;
+  }
+
+  .dropdown .arrow {
+    width: 7px;
+    height: 7px;
+    border: solid white;
+    border-width: 0 1.5px 1.5px 0;
+    display: inline-block;
+    transform: rotate(45deg);
+    margin-top: 1px;
+    transition: transform 0.3s ease;
+  }
+
+  .dropdown:hover .arrow {
+    transform: rotate(90deg);
+  }
+
+  .cart {
+    position: absolute;
+    right: 70px; /* Increased the right margin to add more space */
+    display: flex;
+    align-items: center;
+  }
+
+  .cart-icon {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .cart-icon:hover {
+    transform: scale(1.1);
+    rotate(10deg); /* Optional: Add a bit of rotation on hover for extra effect */
+  }
+
+  .cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #E58411;  /* Updated background color */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+  }
+
   .dropdown-menu {
-    padding: 8px 0; /* Slightly smaller padding for the dropdown */
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    padding: 10px 0;
+    border-radius: 5px;
   }
 
   .dropdown-menu a {
-    padding: 6px 20px; /* Adjust padding inside dropdown items */
-  }
-  
-  /* Optionally, you could change the size of the cart icon and its count for a better fit */
-  .cart-icon {
-    width: 35px; /* Reduce cart icon size */
-    height: 35px; /* Maintain proportionality */
+    padding: 8px 20px;
+    display: block;
+    color: white;
+    text-decoration: none;
   }
 
-  .cart-count {
-    font-size: 10px; /* Smaller cart count font size */
-    padding: 1px 5px; /* Smaller cart count size */
-  }
-}
-
-@media (min-width: 500px) and (max-width: 555px) {
-  header {
-    height: 70px; /* Reduce header height for smaller screens */
-    padding-left: 10px; /* Adjust padding to fit better */
+  .dropdown-menu a:hover {
+    background-color: #444;
   }
 
-  .panto {
-    left: 50px; /* Reduce left margin to fit smaller screens */
-    font-size: 20px; /* Slightly smaller font for the title */
+
+
+
+
+  .content {
+    text-align: center;
+    max-width: 100%;
+    height: 500px;
+    position: absolute;
+    top: 50%;  /* Position content to avoid overlapping with sofa */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the content */
+    color: white; /* Ensure text stands out on the background */
+    padding: 0 20px; /* Add padding to prevent text from hitting the edges */
   }
 
-  nav {
-    gap: 20px; /* Reduce spacing between navigation links */
+  .hedh1s {
+    font-size: 4em;
+    margin-bottom: 10px;
+    Font:Gilroy-Bold;
+    color: white;
   }
 
-  nav a {
-    font-size: 14px; /* Smaller font size for navigation links */
+  .hedps {
+    font-size: 1.4em;
+    line-height: 1.6;
+    font-family: Gilroy-Regular;
+    color: #B6B7B8;
+
   }
 
-  .cart {
-    right: 50px; /* Adjust position of the cart icon */
+
+  /* Tablet view */
+  @media (max-width: 1024px) {
+    .content {
+      padding: 15px; /* Adjust padding */
+    }
+
+    .hedh1s {
+      font-size: 2.5em; /* Reduce hero text size */
+    }
+
+    .hedps {
+      font-size: 1.2em;
+    }
+
+    .cart {
+      right: 50px; /* Adjust cart position */
+    }
+
+    .cart-icon {
+      width: 35px; /* Adjust cart icon size */
+      height: 35px;
+    }
+
+    .cart-count {
+      font-size: 12px; /* Adjust font size for cart count */
+    }
   }
 
-  .cart-icon {
-    width: 30px; /* Smaller cart icon size */
+  /* Phone view */
+  @media (max-width: 600px) {
+    .content {
+      padding: 25px; /* Adjust padding */
+    }
+
+    .hedh1s {
+      font-size: 2em; /* Further reduce hero text size */
+    }
+
+    .hedps {
+      font-size: 1em;
+    }
+  }
+
+  /* Search Bar Styling */
+  .search-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    position: relative; /* To position the icon inside the input */
+  }
+
+  .search-input {
+    width: 260px;
     height: 30px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid gray; /* Border color */
+    border-radius: 30px; /* Increased border radius */
+    background-color: #333;
+    color: white;
+    padding-right: 40px; /* Space for the icon inside */
+    transition: background-color 0.3s ease;
   }
 
-  .cart-count {
-    font-size: 10px; /* Smaller cart count font size */
-    padding: 1px 4px; /* Adjust padding for cart count */
+  .search-input:focus {
+    background-color: #444;
+    outline: none;
   }
-}
+
+  .search-bar-container .search-input::placeholder {
+    color: #B6B7B8;
+  }
+  @media (min-width: 555px) and (max-width: 670px) {
+    /* Increase space for Panto and adjust other layout elements */
+    
+    .panto {
+      left: 60px; /* A little more space between "Panto" and the left edge */
+      font-size: 22px; /* Slightly smaller font size for the title on medium screens */
+    }
+
+    nav {
+      gap: 30px; /* Reduce gap between nav items to fit the smaller screen width */
+    }
+
+    .cart {
+      right: 60px; /* Reduce space for the cart icon on medium screens */
+    }
+
+    nav a {
+      font-size: 14px; /* Smaller font size for navigation links */
+    }
+
+    /* Dropdown Menu Adjustments */
+    .dropdown-menu {
+      padding: 8px 0; /* Slightly smaller padding for the dropdown */
+    }
+
+    .dropdown-menu a {
+      padding: 6px 20px; /* Adjust padding inside dropdown items */
+    }
+    
+    /* Optionally, you could change the size of the cart icon and its count for a better fit */
+    .cart-icon {
+      width: 35px; /* Reduce cart icon size */
+      height: 35px; /* Maintain proportionality */
+    }
+
+    .cart-count {
+      font-size: 10px; /* Smaller cart count font size */
+      padding: 1px 5px; /* Smaller cart count size */
+    }
+  }
+
+  @media (min-width: 500px) and (max-width: 555px) {
+    header {
+      height: 70px; /* Reduce header height for smaller screens */
+      padding-left: 10px; /* Adjust padding to fit better */
+    }
+
+    .panto {
+      left: 50px; /* Reduce left margin to fit smaller screens */
+      font-size: 20px; /* Slightly smaller font for the title */
+      top: 10px;
+    }
+
+    nav {
+      gap: 20px; /* Reduce spacing between navigation links */
+    }
+
+    nav a {
+      font-size: 14px; /* Smaller font size for navigation links */
+    }
+
+    .cart {
+      right: 50px; /* Adjust position of the cart icon */
+    }
+
+    .cart-icon {
+      width: 30px; /* Smaller cart icon size */
+      height: 30px;
+    }
+
+    .cart-count {
+      font-size: 10px; /* Smaller cart count font size */
+      padding: 1px 4px; /* Adjust padding for cart count */
+    }
+  }
+
+  /* Добавление эффекта hover для поля ввода */
+  .search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .search-input:hover {
+    border-color: #0056b3;
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.3);
+  }
+
+  .search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    /* border-radius: 10px; */
+  }

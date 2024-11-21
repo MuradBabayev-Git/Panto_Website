@@ -7,147 +7,186 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="js.js">
+  <style>
+  </style>
 </head>
 <body>
-  <header>
-    <h1 class="panto">Panto</h1>
-    <nav>
-      <div class="dropdown">
-        <a href="https://www.ikea.com" target="_blank">Furniture <span class="arrow"></span></a>
-        <div class="dropdown-menu">
-          <a href="https://www.ikea.com" target="_blank">IKEA</a>
-          <a href="https://www.wayfair.com" target="_blank">Wayfair</a>
+  <div class="Main">
+    <header>
+      <h1 class="panto">Panto</h1>
+      <nav>
+        <div class="dropdown">
+          <a href="https://www.ikea.com" target="_blank">Furniture <span class="arrow"></span></a>
+          <div class="dropdown-menu">
+            <a href="https://www.ikea.com" target="_blank">IKEA</a>
+            <a href="https://www.wayfair.com" target="_blank">Wayfair</a>
+          </div>
         </div>
+        <a href="https://www.amazon.com" target="_blank">Shop</a>
+        <a href="https://en.wikipedia.org/wiki/About_us" target="_blank">About Us</a>
+        <a href="https://www.contactus.com" target="_blank">Contact</a>
+      </nav>
+      <div class="cart">
+        <a href="https://www.ebay.com" target="_blank">
+          <div class="cart-icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Cart Icon" width="20" height="20">
+          </div>
+        </a>
+        <div class="cart-count">0</div>
       </div>
-      <a href="https://www.amazon.com" target="_blank">Shop</a>
-      <a href="https://en.wikipedia.org/wiki/About_us" target="_blank">About Us</a>
-      <a href="https://www.contactus.com" target="_blank">Contact</a>
-    </nav>
-    <div class="cart">
-      <a href="https://www.ebay.com" target="_blank">
-        <div class="cart-icon">
-          <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Cart Icon" width="20" height="20">
-        </div>
-      </a>
-      <div class="cart-count">0</div>
+    </header>
+  
+    <!-- !-- Hero Section --> 
+    <div class="content">
+      <h1 class="hedh1s">Make Your Interior More <br> Minimalistic & Modern</h1>
+      <p class="hedps">Turn your room with panto into a lot more minimalist <br> and modern with ease and speed</p>
+  
+      <!-- Search Bar Section -->
+      <div class="search-bar-container">
+        <input 
+          type="text" 
+          class="search-input" 
+          placeholder="Search for stores, brands, or anything"
+          id="search-bar"
+        />
+        <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+      </div>
     </div>
-  </header>
-
-  <!-- !-- Hero Section --> 
-  <div class="content">
-    <h1 class="hedh1s">Make Your Interior More <br>
-  Minimalistic & Modern</h1>
-    <p class="hedps">Turn your room with panto into a lot more minimalist <br>
-    and modern with ease and speed</p>
-    <!-- <div class="search-bar">
-      <span class="search-text">Search furniture @</span>
-    </div> -->
-
-    <!-- Search Bar Section -->
-<div class="search-bar-container">
-  <input type="text" class="search-input" placeholder="Search furniture">
-</div>
-
-
-
-
-
-  
-  
-  
-  
+  </div>
 
   <script>
-   // GSAP Animations 
-gsap.from(".panto", { opacity: 0, y: -50, duration: 1, delay: 0.5 });
-gsap.to("nav", { opacity: 1, duration: 1, delay: 1 });
-gsap.from("nav a", { opacity: 0, x: -50, duration: 1, stagger: 0.2, delay: 1.5 });
-gsap.from(".cart", { opacity: 0, x: 100, duration: 1, delay: 1.5 });
+    // GSAP Animations 
+    gsap.from(".panto", { opacity: 0, y: -50, duration: 1, delay: 0.5 });
+    gsap.to("nav", { opacity: 1, duration: 1, delay: 1 });
+    gsap.from("nav a", { opacity: 0, x: -50, duration: 1, stagger: 0.2, delay: 1.5 });
+    gsap.from(".cart", { opacity: 0, x: 100, duration: 1, delay: 1.5 });
 
-// Dropdown Animation
-const dropdown = document.querySelector('.dropdown');
-const dropdownMenu = document.querySelector('.dropdown-menu');
+    // Dropdown Animation
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
 
-dropdown.addEventListener('mouseenter', () => {
-  gsap.to(dropdownMenu, { opacity: 1, y: 10, duration: 0.3, display: 'block' });
-});
+    dropdown.addEventListener('mouseenter', () => {
+      gsap.to(dropdownMenu, { opacity: 1, y: 10, duration: 0.3, display: 'block' });
+    });
 
-dropdown.addEventListener('mouseleave', () => {
-  gsap.to(dropdownMenu, { opacity: 0, y: -10, duration: 0.3, display: 'none' });
-});
+    dropdown.addEventListener('mouseleave', () => {
+      gsap.to(dropdownMenu, { opacity: 0, y: -10, duration: 0.3, display: 'none' });
+    });
 
-// Shake effect for the cart count when hovered over the cart icon
-const cartIcon = document.querySelector('.cart-icon');
-const cartCount = document.querySelector('.cart-count');
+    // Shake effect for the cart count when hovered over the cart icon
+    const cartIcon = document.querySelector('.cart-icon');
+    const cartCount = document.querySelector('.cart-count');
 
-cartIcon.addEventListener('mouseenter', () => {
-  gsap.to(cartCount, {
-    x: 10, 
-    duration: 0.1, 
-    repeat: 10, 
-    yoyo: true, 
-    ease: "linear",
-    onComplete: () => {
-      // Reset the position of the cart count after shaking
+    cartIcon.addEventListener('mouseenter', () => {
       gsap.to(cartCount, {
-        x: 0, // Return to original position
-        duration: 0.3,
-        ease: "power2.out"
+        x: 10, 
+        duration: 0.1, 
+        repeat: 10, 
+        yoyo: true, 
+        ease: "linear",
+        onComplete: () => {
+          gsap.to(cartCount, {
+            x: 0, 
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        }
       });
+    });
+
+    // GSAP Animations for Hero Text
+    gsap.from(".hedh1s", { opacity: 0, y: -50, duration: 1, delay: 1, ease: "power4.out" });
+    gsap.from(".hedps", { opacity: 0, y: 50, duration: 1, delay: 1.5, ease: "power4.out" });
+
+    // GSAP Animations for Search Bar Section
+    gsap.from(".search-bar-container", { opacity: 0, y: 50, duration: 1, delay: 2, ease: "power4.out" });
+
+    // Массив фраз для placeholder
+    const placeholderTexts = [
+      "Search for Amazon, IKEA, or eBay...",
+      "Looking for Target, Walmart, or Nike?",
+      "Search for electronics, furniture, or fashion..."
+    ];
+
+    const searchBar = document.getElementById('search-bar');
+    let textIndex = 0; // Индекс текущей фразы
+    let charIndex = 0; // Индекс текущего символа в фразе
+    let isTyping = false; // Флаг для отслеживания ввода текста
+
+    // Функция для динамичного набора текста в placeholder
+    function typePlaceholder() {
+      if (isTyping) return; // Останавливаем печатание, если пользователь уже начал вводить
+
+      const currentText = placeholderTexts[textIndex];
+      searchBar.setAttribute("placeholder", currentText.substring(0, charIndex));
+      charIndex++;
+
+      if (charIndex > currentText.length) {
+        // Плавное исчезновение текста перед переключением
+        gsap.to(searchBar, { opacity: 0, duration: 0.5, onComplete: () => {
+          // Задержка перед сменой фразы
+          setTimeout(() => {
+            charIndex = 0;
+            textIndex = (textIndex + 1) % placeholderTexts.length; // Следующий текст
+            gsap.to(searchBar, { opacity: 1, duration: 0.5 }); // Плавное возвращение текста
+            typePlaceholder(); // Начинаем печатать новый текст
+          }, 200); // Задержка перед новым набором текста
+        }});
+      } else {
+        setTimeout(typePlaceholder, 50); // Скорость печатания (мс)
+      }
     }
-  });
-});
 
-// GSAP Animations for Hero Text
-gsap.from(".hedh1s", { 
-  opacity: 0, 
-  y: -50, 
-  duration: 1, 
-  delay: 1, 
-  ease: "power4.out"
-});
+    // Запуск эффекта печатания
+    typePlaceholder();
 
-gsap.from(".hedps", { 
-  opacity: 0, 
-  y: 50, 
-  duration: 1, 
-  delay: 1.5, 
-  ease: "power4.out"
-});
-// GSAP Animations for Search Bar Section
-gsap.from(".search-bar-container", { 
-  opacity: 0, 
-  y: 50, 
-  duration: 1, 
-  delay: 2, 
-  ease: "power4.out"
-});
+    // Обработка фокуса (начало ввода)
+    searchBar.addEventListener("focus", () => {
+      isTyping = true; // Пользователь начал вводить, остановить анимацию
+    });
 
-// GSAP Animation for Search Input on Focus
-const searchInput = document.querySelector('.search-input');
+    // Обработка потери фокуса (завершение ввода)
+    searchBar.addEventListener("blur", () => {
+      isTyping = false; // Пользователь ушел, начать анимацию снова
+      typePlaceholder(); // Возобновить анимацию
+    });
 
-searchInput.addEventListener('focus', () => {
-  gsap.to(searchInput, {
-    scale: 1.05, // Slightly scale up the input field
-    borderColor: '#E58411', // Change border color on focus
-    duration: 0.3,
-    ease: "power2.out"
-  });
-});
+    // Маппинг сайтов
+    const searchMappings = {
+      amazon: "https://www.amazon.com",
+      ikea: "https://www.ikea.com",
+      ebay: "https://www.ebay.com",
+      walmart: "https://www.walmart.com",
+      target: "https://www.target.com",
+      nike: "https://www.nike.com",
+      adidas: "https://www.adidas.com",
+      samsung: "https://www.samsung.com",
+      microsoft: "https://www.microsoft.com",
+      apple: "https://www.apple.com",
+      etsy: "https://www.etsy.com",
+      zara: "https://www.zara.com",
+      uniqlo: "https://www.uniqlo.com",
+      hm: "https://www.hm.com",
+      bestbuy: "https://www.bestbuy.com",
+      flipkart: "https://www.flipkart.com",
+      aliexpress: "https://www.aliexpress.com"
+      // Добавляйте свои сайты
+    };
 
-searchInput.addEventListener('blur', () => {
-  gsap.to(searchInput, {
-    scale: 1, // Reset to original scale
-    borderColor: '#E58411', // Keep border color after focus
-    duration: 0.3,
-    ease: "power2.out"
-  });
-});
+    // Обработка Enter
+    searchBar.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        const searchTerm = searchBar.value.trim().toLowerCase();
+        const url = searchMappings[searchTerm];
 
-
+        if (url) {
+          window.location.href = url;
+        } else {
+          alert("Sorry, no results found. Try another keyword.");
+        }
+      }
+    });
 
   </script>
-  
 </body>
-</html>   
+</html>
