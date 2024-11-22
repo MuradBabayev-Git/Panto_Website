@@ -6,12 +6,15 @@
   <title>Panto</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="style.css">
   <style>
   </style>
 </head>
 <body>
   <div class="Main">
+    <div class="Meffect-boxain">
     <header>
       <h1 class="panto">Panto</h1>
       <nav>
@@ -35,6 +38,7 @@
         <div class="cart-count">0</div>
       </div>
     </header>
+  </div>
   
     <!-- !-- Hero Section --> 
     <div class="content">
@@ -53,6 +57,34 @@
       </div>
     </div>
   </div>
+
+
+  <section class="why-choose-us">
+    <div class="container">
+        <div class="left">
+            <h2>Why <br> Choosing Us</h2>
+        </div>
+        <div class="right">
+            <div class="feature gsap-feature">
+                <h3>Luxury facilities</h3>
+                <p>The advantage of hiring a workspace with us is that it gives you comfortable service and all-around facilities.</p>
+                <a href="https://www.wework.com" class="more-info" target="_blank">More Info <span>→</span></a>
+            </div>
+            <div class="feature gsap-feature">
+                <h3>Affordable Price</h3>
+                <p>You can get a workspace of the highest quality at an affordable price and still enjoy the facilities that are only here.</p>
+                <a href="https://www.regus.com" class="more-info" target="_blank">More Info <span>→</span></a>
+            </div>
+            <div class="feature gsap-feature">
+                <h3>Many Choices</h3>
+                <p>We provide many unique workspace from choices so that you can choose the workspace to your liking.</p>
+                <a href="https://www.spacesworks.com" class="more-info" target="_blank">More Info <span>→</span></a>
+            </div>
+        </div>
+    </div>
+</section></div>
+
+
 
   <script>
     // GSAP Animations 
@@ -186,6 +218,62 @@
         }
       }
     });
+    
+// Лёгкое движение для заголовка
+gsap.to(".hedh1s", {
+  y: "-10%", // Очень маленькое перемещение
+  duration: 2, // Плавное движение
+  repeat: -1, // Бесконечный повтор
+  yoyo: true, // Возврат в исходное положение
+  ease: "power1.inOut" // Лёгкое движение
+});
+
+// Лёгкое движение для подзаголовка
+// gsap.to(".hedps", {
+//   y: "-1%", // Очень маленькое перемещение
+//   duration: 3, // Плавное движение
+//   repeat: -1, // Бесконечный повтор
+//   yoyo: true, // Возврат в исходное положение
+//   ease: "power1.inOut" // Лёгкое движение
+// });
+
+// Ensure GSAP library is included in your project
+gsap.registerPlugin(ScrollTrigger);
+
+// Animating the features
+gsap.utils.toArray('.gsap-feature').forEach(feature => {
+  gsap.from(feature, {
+    opacity: 0,
+    y: 50,
+    duration: 1.5,
+    delay: 0.2,
+    scrollTrigger: {
+      trigger: feature,
+      start: "top 80%",
+      end: "top 50%",
+      scrub: true,
+      markers: false
+    }
+  });
+});
+function checkVisibility() {
+            const boxes = document.querySelectorAll('.hidden');
+            boxes.forEach(box => {
+                const rect = box.getBoundingClientRect();
+                if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                    box.classList.add('visible');
+                    box.classList.remove('hidden');
+                }
+            });
+        }
+
+        // Проверяем видимость при загрузке страницы и прокрутке
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+
+
+
+
 
   </script>
 </body>
