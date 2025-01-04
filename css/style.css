@@ -16,7 +16,7 @@ body {
 }
 
 .Main {
-  background-image: url('img/DALL·E\ 2024-11-21\ 12.32.23\ -\ A\ modern\ and\ minimalist\ living\ room\ featuring\ a\ large\ orange\ sofa\ in\ the\ center\,\ surrounded\ by\ plants\ on\ the\ sides.\ In\ front\ of\ the\ sofa\,\ there\ is\ a\ s.webp');
+  background-image: url('../img/DALL·E\ 2024-11-21\ 12.32.23\ -\ A\ modern\ and\ minimalist\ living\ room\ featuring\ a\ large\ orange\ sofa\ in\ the\ center\,\ surrounded\ by\ plants\ on\ the\ sides.\ In\ front\ of\ the\ sofa\,\ there\ is\ a\ s.webp');
   background-size: cover;  /* Изображение заполняет весь контейнер */
   background-position: center; /* Центрирование изображения */
   background-repeat: no-repeat; /* Отключение повторов изображения */
@@ -599,4 +599,469 @@ html {
 }
 .visible {
   opacity: 1;
+}
+
+
+/* Burger Menu Button */
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+}
+
+.burger-menu .bar {
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Side Menu Styling */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Hidden off-screen initially */
+  width: 250px;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.9); */
+  color: white;
+  padding: 20px;
+  /* box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); */
+  transition: left 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.side-menu nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-menu nav ul li {
+  margin: 15px 0;
+}
+
+.side-menu nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.side-menu nav ul li a:hover {
+  color: #E58411;
+}
+
+/* Burger Menu Animation */
+.burger-menu.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.burger-menu.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-menu.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.visible{
+  display: block;
+  background-color: red!important;
+}
+/* Show Burger Menu on Small Screens */
+@media only screen and (max-width: 768px) {
+  .visible001{
+    display: none!important;
+    background-color: blue!important;
+  }
+}
+
+.main-content {
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 40px;
+}
+
+.custom-header {
+  background-color: #f4f4f4;
+  padding: 20px;
+  text-align: center;
+}
+
+.custom-header-title {
+  font-size: 24px;
+  margin: 0;
+  color: #333;
+}
+
+/* New styles for the product filter section */
+.product-filter-header {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.custom-filter-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.custom-filter-buttons button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #f2f2f2;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.custom-filter-buttons button.active, .custom-filter-buttons button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.custom-product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.custom-product-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.custom-product-card:hover {
+  transform: translateY(-5px);
+}
+
+.custom-product-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.custom-product-card h3 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.custom-product-card p {
+  color: gray;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.custom-product-card .custom-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.view-more-btn-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.view-more-btn-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.view-more-btn-container button:hover {
+  background-color: #0056b3;
+}
+
+.hidden-item {
+  display: none;
+}
+.hidden {
+  display: none;
+}
+.hidden {
+  display: none;
+}
+.visible {
+  display: block;
+}
+
+.filtres001{
+  width: 100%;
+  min-height: 300px;
+  float: left;
+  background-color: #F7F7F7;
+  padding: 50px 20px;
+}
+
+/* General Container */
+.rjtirjhg-container { 
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+.rjtirjhg-header {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
+  color: #333;
+}
+
+/* Filter Tabs */
+.ab3-filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.ab3-filter-tab {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ab3-filter-tab.active {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+  transform: scale(1.1);
+}
+
+.ab3-filter-tab:hover {
+  background-color: #ddd;
+}
+
+/* Carousel */
+.gh6-carousel {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.gh6-carousel-wrapper {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Navigation (Updated for cooler look) */
+.gh6-carousel-nav {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background: linear-gradient(145deg, #fff, #f0f0f0);
+border: 1px solid #ddd;
+width: 50px;
+height: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+cursor: pointer;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15), 0 0 10px rgba(255, 85, 0, 0.4); 
+z-index: 10;
+transition: all 0.3s ease, box-shadow 0.2s ease-in-out;
+}
+
+.gh6-carousel-nav:hover {
+background: linear-gradient(145deg, #ff7a00, #f28500);
+box-shadow: 0 6px 12px rgba(255, 85, 0, 0.5), 0 0 20px rgba(255, 120, 0, 0.8);
+transform: scale(1.2) rotate(5deg);
+}
+
+.gh6-carousel-nav.left {
+left: -25px;
+}
+
+.gh6-carousel-nav.right {
+right: -25px;
+}
+
+.gh6-carousel-nav svg {
+width: 24px;
+height: 24px;
+fill: #000;
+transition: fill 0.3s ease;
+}
+
+.gh6-carousel-nav:hover svg {
+fill: #fff;
+}
+
+/* Product Card */
+.ab4-product-card {
+  flex: 0 0 25%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(30px);
+  transition: all 0.3s ease, box-shadow 0.3s;
+}
+
+.ab4-product-card:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: scale(1.03);
+}
+
+.ab4-product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.ab4-product-image:hover {
+  transform: scale(1.05);
+}
+
+.ab4-product-title {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.ab4-product-price {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.ab4-product-rating {
+  color: #f5a623;
+  margin-bottom: 10px;
+}
+
+.ab4-add-to-cart {
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ab4-add-to-cart:hover {
+  background-color: #444;
+}
+
+/* Navigation */
+.gh6-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: 1px solid #ddd;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.gh6-carousel-nav:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.1);
+}
+
+.gh6-carousel-nav.left {
+  left: -25px;
+}
+
+.gh6-carousel-nav.right {
+  right: -25px;
+}
+
+/* View All */
+.rjtirjhg-view-all {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #f28500;
+  transition: color 0.3s ease;
+}
+
+.rjtirjhg-view-all:hover {
+  text-decoration: underline;
+  color: #ff7a00;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Media Query for Mobile and Tablet */
+@media screen and (max-width: 768px) {
+  .gh6-carousel-wrapper {
+    gap: 10px;
+  }
+
+  .ab4-product-card {
+    flex: 0 0 50%;
+  }
+
+  .gh6-carousel-nav.left {
+    left: -10px;
+  }
+
+  .gh6-carousel-nav.right {
+    right: -10px;
+  }
+
+  .ab3-filter-tabs {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 }
