@@ -1,0 +1,16 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Все категории</h1>
+<a href="{% url 'categories' %}">Categories</a>
+<div class="category-list">
+    {% for category in categories %}
+    <div class="category-item">
+        <h2>{{ category.name }}</h2>
+        <p>{{ category.description }}</p>
+        <p><strong>Количество новостей:</strong> {{ category.news_count }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
