@@ -7,7 +7,7 @@
 <div class="category-list">
     {% for category in categories %}
     <div class="category-item">
-        <h2>{{ category.name }}</h2>
+        <h2><a href="{% url 'category_detail' category.id %}">{{ category.name }}</a></h2>
         <p>{{ category.description }}</p>
         <p><strong>Количество новостей:</strong> {{ category.news_count }}</p>
     </div>

@@ -1,6 +1,6 @@
 from django.utils.html import format_html
 from django.contrib import admin
-from .models import News, Category
+from .models import Author, Gender, News, Category, Product, Tag
 
 
 class NewsAdmin(admin.ModelAdmin):
@@ -27,3 +27,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(News, NewsAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register([Tag, Author, Product, Gender])

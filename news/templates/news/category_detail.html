@@ -1,0 +1,17 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+<h1>{{ category.name }}</h1>
+<p>{{ category.description }}</p>
+<p><strong>Количество новостей:</strong> {{ category.news_count }}</p>
+
+<h2>Новости категории:</h2>
+<ul>
+    {% for news_item in category.news.all %}
+        <li>{{ news_item.title }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

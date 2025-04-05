@@ -1,8 +1,12 @@
 // GSAP Animations 
-gsap.from(".panto", { opacity: 0, y: -50, duration: 1, delay: 0.5 });
+gsap.fromTo(".panto", 
+  { opacity: 1, y: -50 }, 
+  { opacity: 1, y: 0, duration: 1, delay: 0.5 }
+);
+
 gsap.to("nav", { opacity: 1, duration: 1, delay: 1 });
-gsap.from("nav a", { opacity: 0, x: -50, duration: 1, stagger: 0.2, delay: 1.5 });
-gsap.from(".cart", { opacity: 0, x: 100, duration: 1, delay: 1.5 });
+gsap.from("nav a", { opacity: 1, x: -50, duration: 1, stagger: 0.2, delay: 1.5 });
+gsap.from(".cart", { opacity: 1, x: 100, duration: 1, delay: 1.5 });
 
 // Dropdown Animation
 const dropdown = document.querySelector('.dropdown');
@@ -13,7 +17,8 @@ dropdown.addEventListener('mouseenter', () => {
 });
 
 dropdown.addEventListener('mouseleave', () => {
-  gsap.to(dropdownMenu, { opacity: 0, y: -10, duration: 0.3, display: 'none' });
+  gsap.to(dropdownMenu, { opacity: 0, y: -10, duration: 0.3, autoAlpha: 0 });
+
 });
 
 // Shake effect for the cart count when hovered over the cart icon
@@ -38,8 +43,8 @@ cartIcon.addEventListener('mouseenter', () => {
 });
 
 // GSAP Animations for Hero Text
-gsap.from(".hedh1s", { opacity: 0, y: -50, duration: 1, delay: 1, ease: "power4.out" });
-gsap.from(".hedps", { opacity: 0, y: 50, duration: 1, delay: 1.5, ease: "power4.out" });
+gsap.from(".hedh1s", { opacity: 1, y: -50, duration: 1, delay: 1, ease: "power4.out" });
+gsap.from(".hedps", { opacity: 1, y: 50, duration: 1, delay: 1.5, ease: "power4.out" });
 
 // GSAP Animations for Search Bar Section
 gsap.from(".search-bar-container", { opacity: 0, y: 50, duration: 1, delay: 2, ease: "power4.out" });

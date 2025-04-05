@@ -1,5 +1,5 @@
 from django.http import Http404, HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.db.models import Count
 from news.models import Category, News
 from django.db.models import Count
@@ -51,17 +51,6 @@ def categories(request, cat_id):
     # return HttpResponseNotFound(f"Category - {cat_id}")
     return render(request, "news/categories.html", context)
 
-def categories_list(request):
-    cat = Category.objects.all().annotate(news_count=Count('newss'))
-
-    context = { 
-        "categories": cat,
-        "title": "Categories",
-    }
-    
-    return render(request, "news/categories_list.html", context)
-
-
 
 def news_detail(request, news_id):
     context = {
@@ -69,3 +58,14 @@ def news_detail(request, news_id):
         "title": "Categories",
     }
     return render(request, "news/standard-formate.html", context)
+
+
+
+def categories_list(request):
+    categories = Category.objects.all()  
+    return render(request, 'news/categories_list.html', {'categories': categories})
+
+
+def category_detail(request, category_id):
+    category = get_object_or_404(Category, id=category_id) 
+    return render(request, 'news/category_detail.html', {'category': category})
