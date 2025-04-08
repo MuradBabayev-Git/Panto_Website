@@ -200,8 +200,8 @@ const filter = event.target.getAttribute('data-filter');
 const productCards = document.querySelectorAll('.custom-product-card');
 
 // Reset the 'active' class on all buttons and add it to the clicked one
-document.querySelectorAll('.custom-filter-btn').forEach(btn => btn.classList.remove('active'));
-event.target.classList.add('active');
+document.querySelectorAll('.custom-filter-btn').forEach(btn => btn.classList.remove('filactive'));
+event.target.classList.add('filactive');
 
 // Hide all products initially
 productCards.forEach(card => {

@@ -23,7 +23,7 @@
 
 <section class="why-choose-us">
   <div class="container">
-    <div class="left">
+    <div class="left cent_left">
       <h2>Why <br> Choosing Us</h2>
     </div>
     <div class="right">
@@ -49,189 +49,344 @@
 </section>
 </div>
 
+
+<style>
+  /* Новый внешний контейнер */
+  .gh6-carousel-container {
+    position: relative;
+    overflow: visible;
+  }
+
+  /* Убираем дублирующиеся стили стрелок */
+  .gh6-carousel {
+    overflow: hidden;
+    
+    /* оставляем только на слайд-обёртке */
+  }
+
+  /* Позиционирование стрелок теперь относительно нового контейнера */
+  .gh6-carousel-nav.left {
+    left: -25px;
+  }
+
+  .gh6-carousel-nav.right {
+    right: -25px;
+  }
+</style>
+
+
+
 <section id="filtres" class="filtres001">
   <div class="rjtirjhg-container">
     <div class="rjtirjhg-header">Best Selling Product</div>
 
     <!-- Filter Tabs -->
     <div class="ab3-filter-tabs">
-      <div class="ab3-filter-tab active" data-category="all">All</div>
-      <div class="ab3-filter-tab" data-category="chair">Chair</div>
-      <div class="ab3-filter-tab" data-category="beds">Beds</div>
-      <div class="ab3-filter-tab" data-category="sofa">Sofa</div>
-      <div class="ab3-filter-tab" data-category="lamp">Lamp</div>
+      <style>
+
+      </style>
+      <div class="gr_oup">
+        <!-- <div class="ab3-filter-tab filactive" data-category="all">All</div> -->
+        <div class="ab3-filter-tab" data-category="chair">Chair</div>
+        <div class="ab3-filter-tab" data-category="beds">Beds</div>
+        <div class="ab3-filter-tab" data-category="sofa">Sofa</div>
+        <div class="ab3-filter-tab" data-category="lamp">Lamp</div>
+      </div>
+
     </div>
 
     <!-- Carousel -->
-    <div class="gh6-carousel">
-      <div class="gh6-carousel-wrapper">
-        <!-- Example Product Cards -->
-        <div class="ab4-product-card" data-category="chair">
-          <img
-            src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
-            alt="Chair" class="ab4-product-image">
-          <div class="ab4-product-title">Sakarias Armchair</div>
-          <div class="ab4-product-rating">★★★★★</div>
-          <div class="ab4-product-price">$392</div>
-          <button class="ab4-add-to-cart">+</button>
-        </div>
-        <div class="ab4-product-card" data-category="beds">
-          <img
-            src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
-            alt="Bed" class="ab4-product-image">
-          <div class="ab4-product-title">King Bed</div>
-          <div class="ab4-product-rating">★★★★★</div>
-          <div class="ab4-product-price">$799</div>
-          <button class="ab4-add-to-cart">+</button>
-        </div>
-        <div class="ab4-product-card" data-category="sofa">
-          <img
-            src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
-            alt="Sofa" class="ab4-product-image">
-          <div class="ab4-product-title">Modern Sofa</div>
-          <div class="ab4-product-rating">★★★★★</div>
-          <div class="ab4-product-price">$999</div>
-          <button class="ab4-add-to-cart">+</button>
-        </div>
-        <div class="ab4-product-card" data-category="lamp">
-          <img
-            src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
-            alt="Lamp" class="ab4-product-image">
-          <div class="ab4-product-title">Stylish Lamp</div>
-          <div class="ab4-product-rating">★★★★☆</div>
-          <div class="ab4-product-price">$49</div>
-          <button class="ab4-add-to-cart">+</button>
-        </div>
+    <div class="gh6-carousel-container">
+      <div class="gh6-carousel">
+        <div class="gh6-carousel-wrapper">
+         
+         
+            <!-- Example Product Cards -->
+            <div class="ab4-product-card" data-category="chair">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Chair" class="ab4-product-image">
+              <div class="ab4-product-title">Sakarias Armchair</div>
+              <div class="ab4-product-rating">★★★★★</div>
+              <div class="ab4-product-price">$392</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="chair">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Chair" class="ab4-product-image">
+              <div class="ab4-product-title">Sakarias Armchair</div>
+              <div class="ab4-product-rating">★★★★★</div>
+              <div class="ab4-product-price">$392</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="chair">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Chair" class="ab4-product-image">
+              <div class="ab4-product-title">Sakarias Armchair</div>
+              <div class="ab4-product-rating">★★★★★</div>
+              <div class="ab4-product-price">$392</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="chair">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Chair" class="ab4-product-image">
+              <div class="ab4-product-title">Sakarias Armchair</div>
+              <div class="ab4-product-rating">★★★★★</div>
+              <div class="ab4-product-price">$392</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="beds">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Bed" class="ab4-product-image">
+              <div class="ab4-product-title">King Bed</div>
+              <div class="ab4-product-rating">★★★★★</div>
+              <div class="ab4-product-price">$799</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="beds">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Bed" class="ab4-product-image">
+              <div class="ab4-product-title">King Bed</div>
+              <div class="ab4-product-rating">★★★★★</div>
+              <div class="ab4-product-price">$799</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="beds">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Bed" class="ab4-product-image">
+              <div class="ab4-product-title">King Bed</div>
+              <div class="ab4-product-rating">★★★★★</div>
+              <div class="ab4-product-price">$799</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="beds">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Bed" class="ab4-product-image">
+              <div class="ab4-product-title">King Bed</div>
+              <div class="ab4-product-rating">★★★★★</div>
+              <div class="ab4-product-price">$799</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="sofa">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Sofa" class="ab4-product-image">
+              <div class="ab4-product-title">Modern Sofa</div>
+              <div class="ab4-product-rating">★★★★★</div>
+              <div class="ab4-product-price">$999</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="sofa">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Sofa" class="ab4-product-image">
+              <div class="ab4-product-title">Modern Sofa</div>
+              <div class="ab4-product-rating">★★★★★</div>
+              <div class="ab4-product-price">$999</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="sofa">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Sofa" class="ab4-product-image">
+              <div class="ab4-product-title">Modern Sofa</div>
+              <div class="ab4-product-rating">★★★★★</div>
+              <div class="ab4-product-price">$999</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="sofa">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Sofa" class="ab4-product-image">
+              <div class="ab4-product-title">Modern Sofa</div>
+              <div class="ab4-product-rating">★★★★★</div>
+              <div class="ab4-product-price">$999</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="lamp">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Lamp" class="ab4-product-image">
+              <div class="ab4-product-title">Stylish Lamp</div>
+              <div class="ab4-product-rating">★★★★☆</div>
+              <div class="ab4-product-price">$49</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="lamp">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Lamp" class="ab4-product-image">
+              <div class="ab4-product-title">Stylish Lamp</div>
+              <div class="ab4-product-rating">★★★★☆</div>
+              <div class="ab4-product-price">$49</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="lamp">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Lamp" class="ab4-product-image">
+              <div class="ab4-product-title">Stylish Lamp</div>
+              <div class="ab4-product-rating">★★★★☆</div>
+              <div class="ab4-product-price">$49</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+            <div class="ab4-product-card" data-category="lamp">
+              <img
+                src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+                alt="Lamp" class="ab4-product-image">
+              <div class="ab4-product-title">Stylish Lamp</div>
+              <div class="ab4-product-rating">★★★★☆</div>
+              <div class="ab4-product-price">$49</div>
+              <button class="ab4-add-to-cart">+</button>
+            </div>
+          </div>
+
+       
       </div>
       <div class="gh6-carousel-nav left">&#8249;</div>
-      <div class="gh6-carousel-nav right">&#8250;</div>
+  <div class="gh6-carousel-nav right">&#8250;</div>
     </div>
+<style>
+  .al_a{
+    width: 100%;
+    min-height: 50px;
+    /* background-color: red; */
 
-    <a href="#" class="rjtirjhg-view-all">View All</a>
+  }
+</style>
+    <div class="al_a">
+      <a href="#" class="rjtirjhg-view-all">View All</a>
+    </div>
   </div>
+</section>
 
-
-  <section class="experience-section">
-    <div class="experience-container">
-      <div class="left-section">
-        <div class="image-placeholder"></div>
-      </div>
-      <div class="right-section">
-        <p class="experience-label">EXPERIENCES</p>
-        <h2 class="experience-title">
-          We Provide You The <br />
-          <span class="highlight">Best Experience</span>
-        </h2>
-        <p class="experience-description">
-          You don’t have to worry about the result because all of these interiors are made by people
-          who are professionals in their fields with an elegant and luxurious style and with premium
-          quality materials.
-        </p>
-        <a href="#" class="more-info-link">
-          More Info <span class="arrow">→</span>
-        </a>
-      </div>
+<section class="experience-section">
+  <div class="experience-container">
+    <div class="left-section">
+      <div class="image-placeholder"></div>
     </div>
-  </section>
+    <div class="right-section">
+      <p class="experience-label">EXPERIENCES</p>
+      <h2 class="experience-title">
+        We Provide You The <br />
+        <span class="highlight">Best Experience</span>
+      </h2>
+      <p class="experience-description">
+        You don’t have to worry about the result because all of these interiors are made by people
+        who are professionals in their fields with an elegant and luxurious style and with premium
+        quality materials.
+      </p>
+      <a href="#" class="more-info-link">
+        More Info <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
 
 
 
-  <section class="materials-section">
-    <div class="materials-container">
-      <!-- Левая часть с текстом -->
-      <div class="text-container">
-        <p class="section-label">Materials</p>
-        <h2 class="section-title">
-          Very Serious <br />
-          Materials for Making <br />
-          Furniture
-        </h2>
-        <p class="section-description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam, justo id viverra tempus, nisi eros
-          hendrerit urna, nec suscipit turpis ligula ut enim.
-        </p>
-        <!-- <a href="#" class="more-info-link">
+<section class="materials-section">
+  <div class="materials-container">
+    <!-- Левая часть с текстом -->
+    <div class="text-container">
+      <p class="section-label">Materials</p>
+      <h2 class="section-title">
+        Very Serious <br />
+        Materials for Making <br />
+        Furniture
+      </h2>
+      <p class="section-description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam, justo id viverra tempus, nisi eros
+        hendrerit urna, nec suscipit turpis ligula ut enim.
+      </p>
+      <!-- <a href="#" class="more-info-link">
             More Info <span class="arrow">→</span>
           </a> -->
+    </div>
+    <!-- Правая часть с изображениями -->
+    <div class="images-container">
+      <!-- Левая часть правой стороны: маленькие картинки -->
+      <div class="small-images-column">
+        <img src="https://re-forma.ru/upload/products/galleries/58_753.jpg" alt="Small Image 1" class="small-image2" />
+        <img
+          src="https://www.bontempi.it/wp-content/uploads/2022/04/MILLENNIUM_20-39M328_L116_CLARA_40-11PR26T_SOUL_56-12_56-11_56-10M326_POP_56-18M326_PICA_15-72LDM326_CM006_L087_1.jpg"
+          alt="Small Image 2" class="small-image" />
       </div>
-      <!-- Правая часть с изображениями -->
-      <div class="images-container">
-        <!-- Левая часть правой стороны: маленькие картинки -->
-        <div class="small-images-column">
-          <img src="https://re-forma.ru/upload/products/galleries/58_753.jpg" alt="Small Image 1"
-            class="small-image2" />
-          <img
-            src="https://www.bontempi.it/wp-content/uploads/2022/04/MILLENNIUM_20-39M328_L116_CLARA_40-11PR26T_SOUL_56-12_56-11_56-10M326_POP_56-18M326_PICA_15-72LDM326_CM006_L087_1.jpg"
-            alt="Small Image 2" class="small-image" />
-        </div>
-        <!-- Правая часть правой стороны: большая картинка -->
-        <div class="large-image-container">
-          <img src="https://sheffilton.com/uploads/userfiles/agagahadsfd.jpg" alt="Large Image" class="large-image" />
-        </div>
+      <!-- Правая часть правой стороны: большая картинка -->
+      <div class="large-image-container">
+        <img src="https://sheffilton.com/uploads/userfiles/agagahadsfd.jpg" alt="Large Image" class="large-image" />
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
 
-  <div class="slider-container">
-    <button class="arrow arrow-left">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-      </svg>
-    </button>
-    <div class="slider">
-      <div class="card">
-        <div class="profile-picture">
-          <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile Picture">
-        </div>
-        <div class="card-content">
-          <h3>John Doe</h3>
-          <p>Tattoo Artist</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <div class="rating">★★★★★</div>
-        </div>
+<div class="slider-container">
+  <button class="arrow arrow-left">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+    </svg>
+  </button>
+  <div class="slider">
+    <div class="card">
+      <div class="profile-picture">
+        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile Picture">
       </div>
-      <div class="card">
-        <div class="profile-picture">
-          <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Profile Picture">
-        </div>
-        <div class="card-content">
-          <h3>Jane Smith</h3>
-          <p>Photographer</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <div class="rating">★★★★★</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="profile-picture">
-          <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Profile Picture">
-        </div>
-        <div class="card-content">
-          <h3>Alex Brown</h3>
-          <p>Programmer</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <div class="rating">★★★★☆</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="profile-picture">
-          <img src="https://randomuser.me/api/portraits/women/89.jpg" alt="Profile Picture">
-        </div>
-        <div class="card-content">
-          <h3>Jane Smith</h3>
-          <p>Photographer</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <div class="rating">★★★★★</div>
-        </div>
+      <div class="card-content">
+        <h3>John Doe</h3>
+        <p>Tattoo Artist</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <div class="rating">★★★★★</div>
       </div>
     </div>
-
-    <button class="arrow arrow-right">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
-      </svg>
-    </button>
+    <div class="card">
+      <div class="profile-picture">
+        <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Profile Picture">
+      </div>
+      <div class="card-content">
+        <h3>Jane Smith</h3>
+        <p>Photographer</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <div class="rating">★★★★★</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="profile-picture">
+        <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Profile Picture">
+      </div>
+      <div class="card-content">
+        <h3>Alex Brown</h3>
+        <p>Programmer</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <div class="rating">★★★★☆</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="profile-picture">
+        <img src="https://randomuser.me/api/portraits/women/89.jpg" alt="Profile Picture">
+      </div>
+      <div class="card-content">
+        <h3>Jane Smith</h3>
+        <p>Photographer</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <div class="rating">★★★★★</div>
+      </div>
+    </div>
   </div>
 
-  {% endblock %}
+  <button class="arrow arrow-right">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
+    </svg>
+  </button>
+</div>
+
+{% endblock %}

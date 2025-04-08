@@ -142,7 +142,7 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script>
+  <!-- <script>
     const tabs = document.querySelectorAll('.ab3-filter-tab');
     const cards = document.querySelectorAll('.ab4-product-card');
     const wrapper = document.querySelector('.gh6-carousel-wrapper');
@@ -156,8 +156,8 @@
     // Filter functionality
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
+        tabs.forEach(t => t.classList.remove('filactive'));
+        tab.classList.add('filactive');
         const category = tab.getAttribute('data-category');
 
         cards.forEach(card => {
@@ -195,6 +195,74 @@
       }
       wrapper.style.transform = `translateX(${currentTranslate}px)`;
     });
+  </script> -->
+
+  <script>
+    const tabs = document.querySelectorAll('.ab3-filter-tab');
+    const cards = document.querySelectorAll('.ab4-product-card');
+    const wrapper = document.querySelector('.gh6-carousel-wrapper');
+    const leftNav = document.querySelector('.gh6-carousel-nav.left');
+    const rightNav = document.querySelector('.gh6-carousel-nav.right');
+  
+    let currentTranslate = 0;
+  
+    // Функция для получения видимых карточек
+    function getVisibleCards() {
+      return Array.from(cards).filter(card => card.style.display !== 'none');
+    }
+  
+    // Установка прокрутки
+    function updateCarousel() {
+      const visibleCards = getVisibleCards();
+      const cardWidth = visibleCards[0]?.offsetWidth + 20 || 0;
+      const maxTranslate = (visibleCards.length * cardWidth) - wrapper.offsetWidth;
+  
+      // Ограничим прокрутку, чтобы не уехало слишком далеко
+      if (currentTranslate < 0) currentTranslate = 0;
+      if (currentTranslate > maxTranslate) currentTranslate = maxTranslate;
+  
+      wrapper.style.transform = `translateX(-${currentTranslate}px)`;
+    }
+  
+    // Обработка фильтрации
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('filactive'));
+        tab.classList.add('filactive');
+        const category = tab.getAttribute('data-category');
+  
+        cards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+  
+        // Сбросить прокрутку при фильтрации
+        currentTranslate = 0;
+        updateCarousel();
+      });
+    });
+  
+    // Стрелки навигации
+    leftNav.addEventListener('click', () => {
+      const visibleCards = getVisibleCards();
+      const cardWidth = visibleCards[0]?.offsetWidth + 20 || 0;
+      currentTranslate -= cardWidth * 1; // Прокрутка на 1 карточку
+      updateCarousel();
+    });
+  
+    rightNav.addEventListener('click', () => {
+      const visibleCards = getVisibleCards();
+      const cardWidth = visibleCards[0]?.offsetWidth + 20 || 0;
+      currentTranslate += cardWidth * 1;
+      updateCarousel();
+    });
+  
+    // Первичная инициализация (на случай, если есть фильтр по умолчанию)
+    window.addEventListener('load', updateCarousel);
+    window.addEventListener('resize', updateCarousel);
   </script>
 
   <!-- <script src="static/news/assets/js/js.js"></script> -->
