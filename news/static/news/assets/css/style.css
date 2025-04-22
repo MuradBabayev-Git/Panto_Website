@@ -5,15 +5,18 @@ body {
   /* Disable horizontal scroll */
 }
 
-element.style {
+/* element.style {
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;
-  /* Или display: inline-block, если нужно */
+
   transform: translate(0px, 0px) !important;
+} */
+
+.al_a{
+  width: 100%;
+  min-height: 50px;
 }
-
-
 
 .effect-box {
   opacity: 0;
@@ -171,9 +174,13 @@ nav a:active {
 }
 
 .cart-count {
+  min-width: 25px;
+    height: 25px;
+    position: absolute;
+    top: -5px;
+    right: -10px;
   position: absolute;
-  top: -5px;
-  right: -5px;
+ 
   background-color: #E58411;
   /* Updated background color */
   color: white;
@@ -181,6 +188,9 @@ nav a:active {
   font-weight: bold;
   padding: 2px 6px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dropdown-menu {
@@ -205,7 +215,114 @@ nav a:active {
 }
 
 
+.team-slider {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  overflow: hidden;
+}
 
+.employee-cards {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.employee-card {
+  min-width: 280px;
+  margin: 0 20px;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.employee-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 4px solid #e9ecef;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.employee-info h3 {
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-size: 1.4rem;
+}
+
+.employee-position {
+  margin-bottom: 12px;
+  color: #7f8c8d;
+  font-weight: 500;
+}
+
+.employee-bio {
+  margin-bottom: 15px;
+  color: #34495e;
+  line-height: 1.5;
+}
+
+.employee-rating {
+  color: #f39c12;
+  font-size: 22px;
+  margin-top: 15px;
+  letter-spacing: 2px;
+}
+
+.slider-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: #ffffff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  transition: all 0.3s ease;
+}
+
+.slider-control--prev {
+  left: 0;
+}
+
+.slider-control--next {
+  right: 0;
+}
+
+.slider-control:hover {
+  background: #f1f1f1;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.slider-control svg {
+  width: 28px;
+  height: 28px;
+  fill: #2c3e50;
+}
+
+@media (max-width: 768px) {
+  .employee-card {
+      min-width: 260px;
+      margin: 0 15px;
+  }
+  
+  .slider-control {
+      width: 42px;
+      height: 42px;
+  }
+}
 
 
 .content {
@@ -213,7 +330,8 @@ nav a:active {
   max-width: 100%;
   height: 500px;
   position: absolute;
-  top: 50%;
+  /* top: 50%; */
+  top: 70%;
   /* Position content to avoid overlapping with sofa */
   left: 50%;
   transform: translate(-50%, -50%);
@@ -1032,7 +1150,7 @@ html {
 }
 
 /* Product Card */
-.ab4-product-card {
+.ab4-product-card {z
   flex: 0 0 25%;
   background: #fff;
   border: 1px solid #ddd;
@@ -1197,6 +1315,9 @@ html {
   flex: 1;
   position: relative;
   transform: translateX(-120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .image-placeholder {
@@ -8773,3 +8894,201 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+/* Основные стили для контейнера слайдера */
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  position: relative;
+}
+
+/* Стили для стрелок */
+.arrow {
+  background: #ffffff;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.arrow:hover {
+  background: #f5f5f5;
+  transform: scale(1.05);
+}
+
+.arrow svg {
+  width: 24px;
+  height: 24px;
+  fill: #333333;
+}
+
+/* Стили для области слайдера */
+.slider {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Для Firefox */
+  -ms-overflow-style: none; /* Для IE и Edge */
+  padding: 20px 0;
+  width: 100%;
+}
+
+.slider::-webkit-scrollbar {
+  display: none; /* Для Chrome, Safari и Opera */
+}
+
+/* Стили для карточек */
+.card {
+  min-width: 280px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  text-align: center;
+}
+
+.card-content h3 {
+  margin: 0 0 5px 0;
+  color: #333333;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.card-content p {
+  margin: 0 0 15px 0;
+  color: #666666;
+  font-size: 16px;
+}
+
+.card-content p:last-of-type {
+  font-style: italic;
+  color: #555555;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.rating {
+  color: #FFD700;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+  .slider-container {
+    padding: 30px 15px;
+  }
+  
+  .arrow {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  .arrow-left {
+    left: 10px;
+  }
+  
+  .arrow-right {
+    right: 10px;
+  }
+  
+  .card {
+    min-width: 260px;
+    padding: 25px;
+  }
+  
+  .profile-picture {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+
+
+
+
+
+.news-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.news-image img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+.news-meta {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+}
+
+.news-content {
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.news-tags {
+  margin-bottom: 20px;
+}
+
+.tag {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 3px 8px;
+  margin-right: 5px;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #333;
+}
+
+.news-actions {
+  margin-top: 30px;
+}

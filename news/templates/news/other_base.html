@@ -1,0 +1,679 @@
+  {% load static %}
+
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'news/assets/css/style.css' %}">
+    <title>{{ title }}</title>
+    <!-- <link rel="icon" href="{% static 'news/assets/image/sm-logo.svg' %}" type="image/gif" sizes="20x20"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  </head>
+  <button class="scroll-to-top">↑</button> 
+
+  <style>
+    .scroll-to-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scroll-to-top-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #000;
+      color: white;
+      border: none;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+
+    .scroll-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .team-slider-container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .team-slider-track {
+      display: flex;
+      transition: transform 0.5s ease;
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    .employee-card {
+      min-width: 280px;
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .slider-nav.prev {
+      left: 10px;
+    }
+
+    .slider-nav.next {
+      right: 10px;
+    }
+  </style>
+
+  <script>
+    // Показ/скрытие кнопки
+    document.addEventListener('DOMContentLoaded', () => {
+      // Данные команды
+      const teamData = [
+        {
+          name: "John Doe",
+          position: "Tattoo Artist",
+          bio: "Professional tattoo artist with 10 years of experience in traditional styles.",
+          rating: "★★★★★",
+          photo: "https://randomuser.me/api/portraits/men/32.jpg"
+        },
+        {
+          name: "Jane Smith",
+          position: "Photographer",
+          bio: "Specializing in portrait and fashion photography with unique style.",
+          rating: "★★★★★",
+          photo: "https://randomuser.me/api/portraits/women/44.jpg"
+        },
+        {
+          name: "Alex Brown",
+          position: "Web Developer",
+          bio: "Full-stack developer focusing on modern JavaScript frameworks.",
+          rating: "★★★★☆",
+          photo: "https://randomuser.me/api/portraits/men/75.jpg"
+        },
+        {
+          name: "Sarah Johnson",
+          position: "Graphic Designer",
+          bio: "Creating stunning visual identities for brands worldwide.",
+          rating: "★★★★★",
+          photo: "https://randomuser.me/api/portraits/women/68.jpg"
+        }
+      ];
+
+      const track = document.querySelector('.team-slider-track');
+      const prevBtn = document.querySelector('.slider-nav.prev');
+      const nextBtn = document.querySelector('.slider-nav.next');
+      let currentIndex = 0;
+
+      // Генерация карточек
+      teamData.forEach(member => {
+        const card = `
+        <div class="employee-card">
+          <img src="${member.photo}" alt="${member.name}" class="employee-photo">
+          <div class="employee-info">
+            <h3>${member.name}</h3>
+            <p class="position">${member.position}</p>
+            <p class="bio">${member.bio}</p>
+            <div class="rating">${member.rating}</div>
+          </div>
+        </div>
+      `;
+        track.insertAdjacentHTML('beforeend', card);
+      });
+
+      // Анимация GSAP при инициализации
+      gsap.from(".employee-card", {
+        opacity: 0,
+        y: 50,
+        stagger: 0.2,
+        duration: 1,
+        ease: "power2.out"
+      });
+
+      // Навигация
+      function updateSlider() {
+        const cardWidth = document.querySelector('.employee-card').offsetWidth + 20;
+        gsap.to(track, {
+          x: -currentIndex * cardWidth,
+          duration: 0.8,
+          ease: "power3.out"
+        });
+      }
+
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex < teamData.length - 1) {
+          currentIndex++;
+          updateSlider();
+        }
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateSlider();
+        }
+      });
+    }); document.querySelectorAll('.employee-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, {
+          scale: 1.05,
+          boxShadow: '0 10px 15px rgba(0,0,0,0.2)',
+          duration: 0.3
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          scale: 1,
+          boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+          duration: 0.3
+        });
+      });
+    }); let autoScrollInterval = setInterval(() => {
+      if (currentIndex < teamData.length - 1) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+      updateSlider();
+    }, 5000);
+
+    // Остановить при наведении
+    track.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+    track.addEventListener('mouseleave', () => {
+      autoScrollInterval = setInterval(...); // Повторно запустить
+    });
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const button = document.querySelector('.scroll-to-top');
+      if (scrollTop > 500) {
+        button.classList.add('visible');
+      } else {
+        button.classList.remove('visible');
+      }
+    });
+
+    // Плавный скролл наверх с GSAP
+    document.querySelector('.scroll-to-top').addEventListener('click', () => {
+      gsap.to(window, {
+        scrollTo: 0,
+        duration: 1.5,
+        ease: "power3.inOut"
+      });
+    });
+    // В вашем основном JS-файле
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.querySelectorAll('.ab4-product-card').forEach((card, index) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        delay: index * 0.1,
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+    // Для секции "Why Choosing Us"
+    gsap.to(".left.cent_left", {
+      y: -50,
+      scrollTrigger: {
+        trigger: ".why-choose-us",
+        scrub: 1
+      }
+    });
+
+    // Для изображений в секции "Materials"
+    gsap.to(".large-image", {
+      y: -100,
+      scrollTrigger: {
+        trigger: ".materials-section",
+        scrub: 1
+      }
+    });
+    // Эффект при наведении на кнопки "More Info"
+    document.querySelectorAll('.more-info, .action-button').forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        gsap.to(button, {
+          scale: 1.05,
+          duration: 0.3
+        });
+      });
+      button.addEventListener('mouseleave', () => {
+        gsap.to(button, {
+          scale: 1,
+          duration: 0.3
+        });
+      });
+    });
+    // При смене категории
+    document.querySelectorAll('.ab3-filter-tab').forEach(tab => {
+      tab.addEventListener('click', function () {
+        // Анимация переключения
+        gsap.to(".gh6-carousel-wrapper", {
+          opacity: 0,
+          duration: 0.3,
+          onComplete: () => {
+            // После завершения - AJAX-загрузка
+            fetch(`/best-selling/?category=${this.dataset.category}`)
+              .then(response => response.text())
+              .then(html => {
+                document.querySelector('.gh6-carousel-wrapper').innerHTML =
+                  new DOMParser().parseFromString(html, 'text/html')
+                    .querySelector('.gh6-carousel-wrapper').innerHTML;
+
+                // Появление новых карточек
+                gsap.from(".ab4-product-card", {
+                  opacity: 0,
+                  y: 30,
+                  stagger: 0.1,
+                  duration: 0.5
+                });
+              });
+          }
+        });
+      });
+    });
+    // Для заголовка "Make Your Interior More Minimalistic & Modern"
+    const heroTitle = document.querySelector('.hedh1s');
+    const text = heroTitle.innerText;
+    heroTitle.innerHTML = '';
+
+    text.split('').forEach((char, i) => {
+      const span = document.createElement('span');
+      span.textContent = char;
+      span.style.opacity = '0';
+      heroTitle.appendChild(span);
+
+      gsap.to(span, {
+        opacity: 1,
+        delay: i * 0.05,
+        duration: 0.5
+      });
+    }); gsap.from(".footer1", {
+      y: 100,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: ".footer_section",
+        start: "top 80%",
+        toggleActions: "play none none none"
+      }
+    }); document.querySelectorAll('.ab4-product-price').forEach(price => {
+      gsap.to(price, {
+        y: -5,
+        repeat: -1,
+        yoyo: true,
+        duration: 2,
+        ease: "sine.inOut"
+      });
+    }); document.querySelectorAll('.ab4-product-image').forEach(img => {
+      gsap.to(img, {
+        scale: 1.02,
+        repeat: -1,
+        yoyo: true,
+        duration: 3,
+        ease: "sine.inOut"
+      });
+    });
+  </script>
+
+  <body>
+    <div class="Main">
+      <div class="team-slider-container">
+        <div class="team-slider-track">
+          <!-- Карточки генерируются через JS -->
+        </div>
+        <!-- <button class="slider-nav prev">‹</button> -->
+        <!-- <button class="slider-nav next">›</button> -->
+      </div>
+      <header>
+        <h1 class="panto">Panto</h1>
+        <nav>
+          <div class="dropdown">
+            <a href="https://www.ikea.com" target="_blank">Furniture </a>
+            <div class="dropdown-menu">
+              <a href="https://www.ikea.com" target="_blank">IKEA</a>
+              <a href="https://www.wayfair.com" target="_blank">Wayfair</a>
+            </div>
+          </div>
+          <a href="https://www.amazon.com" target="_blank">Shop</a>
+          <a href="https://en.wikipedia.org/wiki/About_us" target="_blank">About Us</a>
+          <a href="https://www.contactus.com" target="_blank">Contact</a>
+        </nav>
+
+
+        <!-- Side Menu -->
+        <div class="side-menu visible001">
+          <nav>
+            <ul>
+              <li><a href="#">Furniture</a></li>
+              <li><a href="https://www.amazon.com" target="_blank">Shop</a></li>
+              <li><a href="https://en.wikipedia.org/wiki/About_us" target="_blank">About Us</a></li>
+              <li><a href="https://www.contactus.com" target="_blank">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="cart">
+          <a href="https://www.ebay.com" target="_blank">
+            <div class="cart-icon">
+              <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Cart Icon" width="20" height="20">
+            </div>
+          </a>
+          <div class="cart-count">0</div>
+        </div>
+      </header>
+    </div>
+
+
+
+
+
+    {% block content %}
+    {% endblock content %}
+
+
+
+    <style>
+      .neznayu {
+        width: 100%;
+        min-height: 200px;
+        /* background-color: purple; */
+        float: left;
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+
+    <div class="">
+      <div class="footer_section">
+        <div class="neznayu">
+          <footer class="footer1">
+            <div class="footer-column footer-brand">
+              <h2>Panto</h2>
+              <p>The advantage of hiring <br> a workspace with us is that it <br> gives you comfortable service.</p>
+              <p>&copy; 2021</p>
+            </div>
+
+            <div class="footer-column">
+              <h3 class="allH3">Services</h3>
+              <ul>
+                <li><a href="#" target="_blank">Email Marketing</a></li>
+                <li><a href="#" target="_blank">Campaigns</a></li>
+                <li><a href="#" target="_blank">Branding</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-column">
+              <h3 class="allH3">Furniture</h3>
+              <ul>
+                <li><a href="#" target="_blank">Beds</a></li>
+                <li><a href="#" target="_blank">Chairs</a></li>
+                <li><a href="#" target="_blank">All</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-column">
+              <h3 class="allH3">Follow Us</h3>
+              <ul>
+                <li><a href="#" target="_blank">Facebook</a></li>
+                <li><a href="#" target="_blank">Twitter</a></li>
+                <li><a href="#" target="_blank">Instagram</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-bottom">
+              <a href="#" target="_blank">Terms & Conditions</a> | <a href="#" target="_blank">Privacy Policy</a>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+
+    <script>
+      // Показ/скрытие кнопки при скролле
+  window.addEventListener('scroll', () => {
+    const btn = document.getElementById('scrollToTopBtn');
+    if (window.scrollY > 300) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  });
+
+  // Плавный скролл наверх при клике
+  document.getElementById('scrollToTopBtn').addEventListener('click', () => {
+    gsap.to(window, {
+      scrollTo: 0,
+      duration: 1.2,
+      ease: "power3.inOut"
+    });
+  });
+      document.addEventListener('DOMContentLoaded', function () {
+        const slider = document.querySelector('.employee-cards');
+        const prevBtn = document.querySelector('.slider-control--prev');
+        const nextBtn = document.querySelector('.slider-control--next');
+        const cards = document.querySelectorAll('.employee-card');
+        const sliderContainer = document.querySelector('.team-slider');
+
+        let currentSlide = 0;
+        let cardWidth = 0;
+        let visibleCards = 0;
+
+        function calculateDimensions() {
+          const firstCard = cards[0];
+          const cardStyle = window.getComputedStyle(firstCard);
+          cardWidth = firstCard.offsetWidth +
+            parseInt(cardStyle.marginLeft) +
+            parseInt(cardStyle.marginRight);
+
+          const containerWidth = sliderContainer.offsetWidth;
+          visibleCards = Math.floor(containerWidth / cardWidth);
+        }
+
+        function updateSlider() {
+          const maxSlide = Math.max(0, cards.length - visibleCards);
+          currentSlide = Math.min(currentSlide, maxSlide);
+          currentSlide = Math.max(currentSlide, 0);
+
+          slider.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+
+          prevBtn.style.display = currentSlide === 0 ? 'none' : 'flex';
+          nextBtn.style.display = currentSlide >= maxSlide ? 'none' : 'flex';
+        }
+
+        prevBtn.addEventListener('click', function () {
+          if (currentSlide > 0) {
+            currentSlide--;
+            updateSlider();
+          }
+        });
+
+        nextBtn.addEventListener('click', function () {
+          const maxSlide = Math.max(0, cards.length - visibleCards);
+          if (currentSlide < maxSlide) {
+            currentSlide++;
+            updateSlider();
+          }
+        });
+
+        // İlk hesablamaları et
+        calculateDimensions();
+        updateSlider();
+
+        // Ekran ölçüsü dəyişdikdə yenilə
+        window.addEventListener('resize', function () {
+          calculateDimensions();
+          updateSlider();
+        });
+      });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <script>
+      const tabs = document.querySelectorAll('.ab3-filter-tab');
+      const cards = document.querySelectorAll('.ab4-product-card');
+      const wrapper = document.querySelector('.gh6-carousel-wrapper');
+      const leftNav = document.querySelector('.gh6-carousel-nav.left');
+      const rightNav = document.querySelector('.gh6-carousel-nav.right');
+
+      let currentTranslate = 0;
+
+      // Функция для получения видимых карточек
+      function getVisibleCards() {
+        return Array.from(cards).filter(card => card.style.display !== 'none');
+      }
+
+      // Установка прокрутки
+      function updateCarousel() {
+        const visibleCards = getVisibleCards();
+        const cardWidth = visibleCards[0]?.offsetWidth + 20 || 0;
+        const maxTranslate = (visibleCards.length * cardWidth) - wrapper.offsetWidth;
+
+        // Ограничим прокрутку, чтобы не уехало слишком далеко
+        if (currentTranslate < 0) currentTranslate = 0;
+        if (currentTranslate > maxTranslate) currentTranslate = maxTranslate;
+
+        wrapper.style.transform = `translateX(-${currentTranslate}px)`;
+      }
+
+      // Функция для активации вкладки и фильтрации
+      function activateTab(tab) {
+        tabs.forEach(t => t.classList.remove('filactive'));
+        tab.classList.add('filactive');
+        const category = tab.getAttribute('data-category');
+
+        cards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Сбросить прокрутку при фильтрации
+        currentTranslate = 0;
+        updateCarousel();
+      }
+
+      // Обработка фильтрации
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          activateTab(tab);
+        });
+      });
+
+      // Автоматически активируем вкладку "Chair" при загрузке
+      window.addEventListener('DOMContentLoaded', () => {
+        const chairTab = document.querySelector('.ab3-filter-tab[data-category="chair"]');
+        if (chairTab) {
+          activateTab(chairTab);
+        }
+      });
+
+      // Стрелки навигации
+      leftNav.addEventListener('click', () => {
+        const visibleCards = getVisibleCards();
+        const cardWidth = visibleCards[0]?.offsetWidth + 20 || 0;
+        currentTranslate -= cardWidth * 1; // Прокрутка на 1 карточку
+        updateCarousel();
+      });
+
+      rightNav.addEventListener('click', () => {
+        const visibleCards = getVisibleCards();
+        const cardWidth = visibleCards[0]?.offsetWidth + 20 || 0;
+        currentTranslate += cardWidth * 1;
+        updateCarousel();
+      });
+
+      // Первичная инициализация
+      window.addEventListener('load', updateCarousel);
+      window.addEventListener('resize', updateCarousel);
+
+
+
+
+      document.querySelectorAll('.ab3-filter-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          const category = tab.dataset.category;
+
+          // Удаляем активный класс у всех вкладок
+          document.querySelectorAll('.ab3-filter-tab').forEach(t => {
+            t.classList.remove('filactive');
+          });
+
+          // Добавляем активный класс текущей вкладке
+          tab.classList.add('filactive');
+
+          // AJAX-запрос для фильтрации
+          fetch(`/best-selling/?category=${category}`)
+            .then(response => response.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, 'text/html');
+              const newProducts = doc.querySelector('.gh6-carousel-wrapper').innerHTML;
+              document.querySelector('.gh6-carousel-wrapper').innerHTML = newProducts;
+            });
+        });
+      });
+    </script>
+
+
+    <!-- <script src="static/news/assets/js/js.js"></script> -->
+    <script src="{% static 'news/assets/js/js.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <button id="scrollToTopBtn" class="scroll-to-top-btn">↑</button>
+  </body>
+
+  </html>

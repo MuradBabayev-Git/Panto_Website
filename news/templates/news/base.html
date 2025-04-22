@@ -9,13 +9,13 @@
   <link rel="stylesheet" href="{% static 'news/assets/css/style.css' %}">
   <title>{{ title }}</title>
   <!-- <link rel="icon" href="{% static 'news/assets/image/sm-logo.svg' %}" type="image/gif" sizes="20x20"> -->
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
-  <div class="Main">
+ 
 
-    <header>
+    <header style="background-color: #6e7386;">
       <h1 class="panto">Panto</h1>
       <nav>
         <div class="dropdown">
@@ -52,7 +52,7 @@
         <div class="cart-count">0</div>
       </div>
     </header>
-  </div>
+
 
 
 
@@ -63,11 +63,20 @@
 
 
 
+<style>
+  .neznayu{
+    width: 100%;
+    min-height: 200px;
+    /* background-color: purple; */
+    float: left;
+    display: flex;
+    justify-content: center;
+  }
+</style>
 
-
-<div class="container-fluid">
+<div class="" >
   <div class="footer_section">
-    <div class="container">
+    <div class="neznayu">
       <footer class="footer1">
         <div class="footer-column footer-brand">
           <h2>Panto</h2>
@@ -110,92 +119,69 @@
   </div>
 </div>
 
-  <script>
-    const slider = document.querySelector('.slider');
-    const leftArrow = document.querySelector('.arrow-left');
-    const rightArrow = document.querySelector('.arrow-right');
 
-    let currentIndex = 0;
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const slider = document.querySelector('.employee-cards');
+      const prevBtn = document.querySelector('.slider-control--prev');
+      const nextBtn = document.querySelector('.slider-control--next');
+      const cards = document.querySelectorAll('.employee-card');
+      const sliderContainer = document.querySelector('.team-slider');
+      
+      let currentSlide = 0;
+      let cardWidth = 0;
+      let visibleCards = 0;
 
-    function updateSliderPosition() {
-      slider.style.transform = `translateX(-${currentIndex * 320}px)`;
-    }
-
-    leftArrow.addEventListener('click', () => {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateSliderPosition();
+      function calculateDimensions() {
+          const firstCard = cards[0];
+          const cardStyle = window.getComputedStyle(firstCard);
+          cardWidth = firstCard.offsetWidth + 
+                    parseInt(cardStyle.marginLeft) + 
+                    parseInt(cardStyle.marginRight);
+          
+          const containerWidth = sliderContainer.offsetWidth;
+          visibleCards = Math.floor(containerWidth / cardWidth);
       }
-    });
 
-    rightArrow.addEventListener('click', () => {
-      if (currentIndex < slider.children.length - 1) {
-        currentIndex++;
-        updateSliderPosition();
+      function updateSlider() {
+          const maxSlide = Math.max(0, cards.length - visibleCards);
+          currentSlide = Math.min(currentSlide, maxSlide);
+          currentSlide = Math.max(currentSlide, 0);
+          
+          slider.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+          
+          prevBtn.style.display = currentSlide === 0 ? 'none' : 'flex';
+          nextBtn.style.display = currentSlide >= maxSlide ? 'none' : 'flex';
       }
-    });
-  </script>
 
+      prevBtn.addEventListener('click', function() {
+          if (currentSlide > 0) {
+              currentSlide--;
+              updateSlider();
+          }
+      });
 
+      nextBtn.addEventListener('click', function() {
+          const maxSlide = Math.max(0, cards.length - visibleCards);
+          if (currentSlide < maxSlide) {
+              currentSlide++;
+              updateSlider();
+          }
+      });
 
+      // İlk hesablamaları et
+      calculateDimensions();
+      updateSlider();
 
-
+      // Ekran ölçüsü dəyişdikdə yenilə
+      window.addEventListener('resize', function() {
+          calculateDimensions();
+          updateSlider();
+      });
+  });
+</script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <!-- <script>
-    const tabs = document.querySelectorAll('.ab3-filter-tab');
-    const cards = document.querySelectorAll('.ab4-product-card');
-    const wrapper = document.querySelector('.gh6-carousel-wrapper');
-    const leftNav = document.querySelector('.gh6-carousel-nav.left');
-    const rightNav = document.querySelector('.gh6-carousel-nav.right');
-
-    let currentTranslate = 0;
-    const cardWidth = cards[0].offsetWidth + 20; // Width of each card with gap
-    const totalCards = cards.length;
-
-    // Filter functionality
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('filactive'));
-        tab.classList.add('filactive');
-        const category = tab.getAttribute('data-category');
-
-        cards.forEach(card => {
-          if (category === 'all') {
-            card.style.display = 'block';
-          } else if (card.getAttribute('data-category') === category) {
-            card.style.display = 'block';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // GSAP Animations
-    gsap.fromTo(
-      cards,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, stagger: 0.2, duration: 1 }
-    );
-
-    // Carousel navigation
-    leftNav.addEventListener('click', () => {
-      currentTranslate += cardWidth;
-      if (Math.abs(currentTranslate) >= cardWidth * (totalCards - 1)) {
-        currentTranslate = 0;
-      }
-      wrapper.style.transform = `translateX(${currentTranslate}px)`;
-    });
-
-    rightNav.addEventListener('click', () => {
-      currentTranslate -= cardWidth;
-      if (currentTranslate > 0) {
-        currentTranslate = -(cardWidth * (totalCards - 1));
-      }
-      wrapper.style.transform = `translateX(${currentTranslate}px)`;
-    });
-  </script> -->
 
   <script>
     const tabs = document.querySelectorAll('.ab3-filter-tab');
@@ -224,25 +210,38 @@
       wrapper.style.transform = `translateX(-${currentTranslate}px)`;
     }
   
+    // Функция для активации вкладки и фильтрации
+    function activateTab(tab) {
+      tabs.forEach(t => t.classList.remove('filactive'));
+      tab.classList.add('filactive');
+      const category = tab.getAttribute('data-category');
+  
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+  
+      // Сбросить прокрутку при фильтрации
+      currentTranslate = 0;
+      updateCarousel();
+    }
+  
     // Обработка фильтрации
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('filactive'));
-        tab.classList.add('filactive');
-        const category = tab.getAttribute('data-category');
-  
-        cards.forEach(card => {
-          if (category === 'all' || card.getAttribute('data-category') === category) {
-            card.style.display = 'block';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-  
-        // Сбросить прокрутку при фильтрации
-        currentTranslate = 0;
-        updateCarousel();
+        activateTab(tab);
       });
+    });
+  
+    // Автоматически активируем вкладку "Chair" при загрузке
+    window.addEventListener('DOMContentLoaded', () => {
+      const chairTab = document.querySelector('.ab3-filter-tab[data-category="chair"]');
+      if (chairTab) {
+        activateTab(chairTab);
+      }
     });
   
     // Стрелки навигации
@@ -260,13 +259,15 @@
       updateCarousel();
     });
   
-    // Первичная инициализация (на случай, если есть фильтр по умолчанию)
+    // Первичная инициализация
     window.addEventListener('load', updateCarousel);
     window.addEventListener('resize', updateCarousel);
-  </script>
+</script>
+
 
   <!-- <script src="static/news/assets/js/js.js"></script> -->
   <script src="{% static 'news/assets/js/js.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 
 </html>

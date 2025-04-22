@@ -1,34 +1,69 @@
 from django.http import Http404, HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render
-from django.db.models import Count
-from news.models import Category, News
-from django.db.models import Count
-
-# Create your views here.
+from django.db.models import Count, Q
+from news.models import Category, News, Product
 
 menu = [
-    {"title": "Home", "url":"home"},
-    {"title": "About", "url":"about"},
-    {"title": "Contact", "url":"contact"},
+    {"title": "Home", "url": "home"},
+    {"title": "About", "url": "about"},
+    {"title": "Contact", "url": "contact"},
 ]
 
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    return render(request, 'news/product_detail.html', {'product': product})
+
+def all_products(request):
+    category = request.GET.get('category', 'all')
+    products = Product.objects.filter(status=True)
+    
+    if category != 'all':
+        products = products.filter(category=category)
+    
+    context = {
+        'products': products,
+        'product_categories': Product.CATEGORY_CHOICES,
+        'active_category': category,
+        'title': 'All Products',
+        'menu': menu
+    }
+    return render(request, 'news/all_products.html', context)
+
+def best_selling_products(request):
+    category = request.GET.get('category', 'all')  # По умолчанию показываем все
+    products = Product.objects.filter(status=True)
+    
+    if category != 'all':
+        products = products.filter(category=category)
+    
+    context = {
+        'products': products[:8],  # Берем первые 8 товаров
+        'active_category': category,
+        'title': 'Best Selling Products',
+        'menu': menu
+    }
+    return render(request, 'news/index.html', context)
 
 def index(request):
-
+    # Получаем все активные продукты (не только chair)
+    products = Product.objects.filter(status=True)
+    
     context = {
-        "title":"Home", 
+        "title": "Home",
         "menu": menu,
-        "posts" : News.objects.all(),
+        "posts": News.objects.all(),
         "categories": Category.objects.all(),
         "cat_selected": 0,
+        "products": products[:8],  # Берем первые 8 товаров для карусели
+        "active_category": "all"   # По умолчанию показываем все категории
     }
-
     return render(request, "news/index.html", context)
 
-
+# Остальные функции остаются без изменений
 def error(request):
     context = {
-        "title":"Error"
+        "title": "Error",
+        "menu": menu
     }
     return render(request, "news/error.html", context)
 
@@ -47,25 +82,54 @@ def categories(request, cat_id):
         "categories": cat,
         "cat_selected": cat_id,
         "title": "Categories",
+        "menu": menu,
+        "products": Product.objects.filter(status=True)
     }
-    # return HttpResponseNotFound(f"Category - {cat_id}")
     return render(request, "news/categories.html", context)
 
-
 def news_detail(request, news_id):
+    news = get_object_or_404(
+        News.objects.select_related('cat', 'author').prefetch_related('tags'),
+        id=news_id,
+        is_published=True
+    )
+
+    related_news = News.objects.filter(
+        cat=news.cat,
+        is_published=True
+    ).exclude(id=news.id).order_by('-time_create')[:3]
+
+    if not related_news.exists():
+        related_news = News.objects.filter(
+            tags__in=news.tags.all(),
+            is_published=True
+        ).exclude(id=news.id).distinct().order_by('-time_create')[:3]
+
+    if not related_news.exists():
+        related_news = News.objects.filter(
+            is_published=True
+        ).exclude(id=news.id).order_by('-time_create')[:3]
+
     context = {
-        "target_news": News.objects.get(id=news_id),
-        "title": "Categories",
+        "news": news,
+        "related_news": related_news,
+        "title": f"{news.title} | Детали новости",
+        "menu": menu,
+        "categories": Category.objects.filter(is_published=True),
+        "cat_selected": news.cat.id,
     }
     return render(request, "news/standard-formate.html", context)
 
-
-
 def categories_list(request):
     categories = Category.objects.all()  
-    return render(request, 'news/categories_list.html', {'categories': categories})
-
+    return render(request, 'news/categories_list.html', {
+        'categories': categories,
+        'menu': menu
+    })
 
 def category_detail(request, category_id):
     category = get_object_or_404(Category, id=category_id) 
-    return render(request, 'news/category_detail.html', {'category': category})
+    return render(request, 'news/category_detail.html', {
+        'category': category,
+        'menu': menu
+    })
