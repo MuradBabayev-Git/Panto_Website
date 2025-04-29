@@ -133,3 +133,7 @@ def category_detail(request, category_id):
         'category': category,
         'menu': menu
     })
+
+
+def about_us(request):
+    return render(request, 'news/about_us.html')
