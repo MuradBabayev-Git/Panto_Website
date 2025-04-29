@@ -95,18 +95,20 @@
       <div class="gh6-carousel">
         <div class="gh6-carousel-wrapper">
           {% for product in products %}
-            <div class="ab4-product-card" data-category="{{ product.category }}">
-              {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="ab4-product-image">
-              {% else %}
-                <img src="https://via.placeholder.com/150" alt="No image" class="ab4-product-image">
-              {% endif %}
-              <div class="ab4-product-title">{{ product.name }}</div>
-              <div class="ab4-product-price">${{ product.price }}</div>
-              <button class="ab4-add-to-cart">+</button>
-            </div>
+            <a href="{% url 'product_detail' product.id %}" class="ab4-product-card-link">  <!-- Add this wrapper -->
+              <div class="ab4-product-card" data-category="{{ product.category }}">
+                {% if product.image %}
+                  <img src="{{ product.image.url }}" alt="{{ product.name }}" class="ab4-product-image">
+                {% else %}
+                  <img src="https://via.placeholder.com/150" alt="No image" class="ab4-product-image">
+                {% endif %}
+                <div class="ab4-product-title">{{ product.name }}</div>
+                <div class="ab4-product-price">${{ product.price }}</div>
+                <button class="ab4-add-to-cart">+</button>
+              </div>
+            </a>  <!-- Close the link -->
           {% empty %}
-            <p>No products found.</p>  <!-- Сообщение, если товаров нет -->
+            <p>No products found.</p>
           {% endfor %}
         </div>
       </div>
@@ -115,7 +117,7 @@
     </div>
 
     <div class="al_a">
-      <a href="#" class="rjtirjhg-view-all">View All</a>
+      <a href="{% url 'all_products' %}" class="rjtirjhg-view-all">View All</a>
     </div>
   </div>
 </section>

@@ -1150,7 +1150,7 @@ html {
 }
 
 /* Product Card */
-.ab4-product-card {z
+.ab4-product-card {
   flex: 0 0 25%;
   background: #fff;
   border: 1px solid #ddd;
@@ -9091,4 +9091,29 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .news-actions {
   margin-top: 30px;
+}
+
+
+.ab4-product-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.ab4-product-card {
+  /* Your existing card styles */
+  cursor: pointer; /* Add cursor pointer to indicate clickability */
+  transition: transform 0.3s ease; /* Optional: add hover effect */
+}
+
+.ab4-product-card:hover {
+  transform: translateY(-5px); /* Optional: add hover effect */
+}
+.ab4-product-card {
+  transition: all 0.3s ease;
+}
+
+.ab4-product-card:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
 }
