@@ -1,186 +1,191 @@
-    {% extends 'news/base.html' %}
-    {% load static %}
+{% extends 'news/base.html' %}
+{% load static %}
 
-    {% block title %}ABOUT US{% endblock %}
+{% block title %}About_us{% endblock %}
 
-    {% block content %}
-    <style>
-        .about-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        .about-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .about-header h1 {
-            font-size: 3rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .about-header h1::after {
-            content: '';
-            position: absolute;
-            width: 70%;
-            height: 3px;
-            background: linear-gradient(90deg, #3498db, #9b59b6);
-            bottom: -10px;
-            left: 15%;
-        }
-        
-        .about-header p {
-            font-size: 1.2rem;
-            color: #7f8c8d;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        .about-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-        
-        .about-card {
-            flex: 1;
-            min-width: 300px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            padding: 30px;
-            transition: transform 0.3s ease;
-        }
-        
-        .about-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .about-card h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-        }
-        
-        .about-card p {
-            color: #7f8c8d;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        
-        .team-section {
-            margin-top: 50px;
-        }
-        
-        .team-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .team-title h2 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-        }
-        
-        .team-members {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-        }
-        
-        .team-member {
-            width: 250px;
-            text-align: center;
-        }
-        
-        .member-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 20px;
-            border: 5px solid #f1f1f1;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .member-name {
-            font-size: 1.3rem;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-        
-        .member-position {
-            color: #3498db;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .member-bio {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-    </style>
+{% block content %}
+<style>
+    .about-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .about-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    
+    .about-header h1 {
+        font-size: 3rem;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .about-header h1::after {
+        content: '';
+        position: absolute;
+        width: 70%;
+        height: 3px;
+        background: linear-gradient(90deg, #3498db, #9b59b6);
+        bottom: -10px;
+        left: 15%;
+    }
+    
+    .about-header p {
+        font-size: 1.2rem;
+        color: #7f8c8d;
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+    
+    .about-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+    
+    .about-card {
+        flex: 1;
+        min-width: 300px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        padding: 30px;
+        transition: transform 0.3s ease;
+    }
+    
+    .about-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .about-card h2 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+    }
+    
+    .about-card p {
+        color: #7f8c8d;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+    
+    .team-section {
+        margin-top: 50px;
+    }
+    
+    .team-title {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    .team-title h2 {
+        font-size: 2.5rem;
+        color: #2c3e50;
+    }
+    
+    .team-members {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+    
+    .team-member {
+        width: 250px;
+        text-align: center;
+    }
+    
+    .member-photo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 20px;
+        border: 5px solid #f1f1f1;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .member-name {
+        font-size: 1.3rem;
+        color: #2c3e50;
+        margin-bottom: 5px;
+    }
+    
+    .member-position {
+        color: #3498db;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+    
+    .member-bio {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .about-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+</style>
 
-    <div class="about-container">
-        <div class="about-header">
-            <h1>Our Story</h1>
-            <p>Founded in 2023, we are a passionate team dedicated to delivering high-quality products and exceptional customer service. Our mission is to make your life easier and more comfortable with our innovative solutions.</p>
+<div class="about-container">
+    {% if about %}
+    <div class="about-header">
+        <h1>{{ about.title }}</h1>
+        {% if about.image %}
+        <img src="{{ about.image.url }}" alt="{{ about.title }}" class="about-image">
+        {% endif %}
+        <p>{{ about.description }}</p>
+    </div>
+    {% endif %}
+    
+    <div class="about-content">
+        <div class="about-card">
+            <h2>Our Vision</h2>
+            <p>To become the most trusted brand in home solutions, recognized for our commitment to quality, sustainability, and customer satisfaction.</p>
         </div>
         
-        <div class="about-content">
-            <div class="about-card">
-                <h2>Our Vision</h2>
-                <p>To become the most trusted brand in home solutions, recognized for our commitment to quality, sustainability, and customer satisfaction.</p>
-            </div>
-            
-            <div class="about-card">
-                <h2>Our Values</h2>
-                <p>Integrity, innovation, and customer focus are at the heart of everything we do. We believe in building long-term relationships based on trust and mutual respect.</p>
-            </div>
-            
-            <div class="about-card">
-                <h2>Our Promise</h2>
-                <p>We guarantee 100% satisfaction with every purchase. If you're not happy, we'll make it right - no questions asked.</p>
-            </div>
+        <div class="about-card">
+            <h2>Our Values</h2>
+            <p>Integrity, innovation, and customer focus are at the heart of everything we do. We believe in building long-term relationships based on trust and mutual respect.</p>
         </div>
         
-        <div class="team-section">
-            <div class="team-title">
-                <h2>Meet Our Team</h2>
-            </div>
-            
-            <div class="team-members">
-                <div class="team-member">
-                    <img src="{% static 'news/assets/img/BlackBig.jpg' %}" alt="Team Member" class="member-photo">
-                    <h3 class="member-name">John Smith</h3>
-                    <p class="member-position">CEO & Founder</p>
-                    <p class="member-bio">With over 15 years of experience in the industry, John leads our company with vision and passion.</p>
-                </div>
-                
-                <div class="team-member">
-                    <img src="{% static 'news/assets/img/BlackBig.jpg' %}" alt="Team Member" class="member-photo">
-                    <h3 class="member-name">Sarah Johnson</h3>
-                    <p class="member-position">Head of Design</p>
-                    <p class="member-bio">Sarah's creative vision shapes the aesthetic and functionality of all our products.</p>
-                </div>
-                
-                <div class="team-member">
-                    <img src="{% static 'news/assets/img/BlackBig.jpg' %}" alt="Team Member" class="member-photo">
-                    <h3 class="member-name">Michael Chen</h3>
-                    <p class="member-position">Customer Experience</p>
-                    <p class="member-bio">Michael ensures every customer interaction is positive, helpful, and memorable.</p>
-                </div>
-            </div>
+        <div class="about-card">
+            <h2>Our Promise</h2>
+            <p>We guarantee 100% satisfaction with every purchase. If you're not happy, we'll make it right - no questions asked.</p>
         </div>
     </div>
-    {% endblock %}
+    
+    <div class="team-section">
+        <div class="team-title">
+            <h2>Meet Our Team</h2>
+        </div>
+        
+        <div class="team-members">
+            {% for developer in developers %}  <!-- Правильное имя переменной -->
+            <div class="team-member">
+                {% if developer.image %}
+                <img src="{{ developer.image.url }}" alt="{{ developer.name }}" class="member-photo">
+                {% else %}
+                <img src="{% static 'images/default_avatar.jpg' %}" alt="{{ developer.name }}" class="member-photo">
+                {% endif %}
+                <h3 class="member-name">{{ developer.name }} {{ developer.surname }}</h3>
+                <p class="member-position">{{ developer.position|default:"Developer" }}</p>
+                <p class="member-bio">Age: {{ developer.age }}<br>Experience: {{ developer.experience|default:"5" }} years</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

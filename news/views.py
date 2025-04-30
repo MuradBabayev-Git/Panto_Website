@@ -1,7 +1,9 @@
+
 from django.http import Http404, HttpResponse, HttpResponseNotFound
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.db.models import Count, Q
-from news.models import Category, News, Product
+from news.models import About_us, Category, ContactMessage, Developer, News, Product, Testimonial
+from django.core.mail import send_mail
 
 menu = [
     {"title": "Home", "url": "home"},
@@ -136,4 +138,33 @@ def category_detail(request, category_id):
 
 
 def about_us(request):
-    return render(request, 'news/about_us.html')
+    about_content = About_us.objects.filter(is_published=True).first()
+    developers = Developer.objects.filter(status=True)
+    
+    context = {
+        'about': about_content,
+        'developers': developers,  # Здесь правильно - 'developers'
+    }
+    return render(request, 'news/about_us.html', context)
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        
+        ContactMessage.objects.create(
+            name=name,
+            email=email,
+            message=message
+        )
+        return redirect('contact_success')  # Перенаправляем на страницу успеха
+    
+    return render(request, 'news/contact.html')
+
+def contact_success(request):
+    return render(request, 'news/contact_success.html')
+
+def testimonials_view(request):
+    testimonials = Testimonial.objects.filter(is_active=True)
+    return render(request, 'your_template.html', {'testimonials': testimonials})

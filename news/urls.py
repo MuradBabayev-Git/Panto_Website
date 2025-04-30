@@ -1,7 +1,7 @@
 
 from django.urls import path, re_path
 
-from .views import all_products, best_selling_products, categories_list, categories, news_detail, index
+from .views import about_us, all_products, best_selling_products, categories_list, categories, contact, contact_success, news_detail, index
 from news import views  
 # from news.views import about, contact, index
 
@@ -14,7 +14,9 @@ urlpatterns = [
     path('best-selling/', best_selling_products, name='best_selling'),
     path('products/all/', all_products, name='all_products'),
     path('product/<int:product_id>/', views.product_detail, name='product_detail'),
-    path('about-us/', views.about_us, name='about_us'),
+    path('about_us/', about_us, name='about_us'),
+    path('contact/', contact, name='contact'),
+    path('contact/success/', contact_success, name='contact_success'),
 
 
 

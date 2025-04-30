@@ -97,14 +97,18 @@ class Developer(models.Model):
     gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="Cinsi")
     name = models.CharField(max_length=300, verbose_name="Ad")
     surname = models.CharField(max_length=300, verbose_name="Soyad")
-    age  = models.PositiveIntegerField(verbose_name="Yaş")
+    position = models.CharField(max_length=300, verbose_name="Position", default="Developer")
+    age = models.PositiveIntegerField(verbose_name="Yaş")
+    experience = models.PositiveIntegerField(verbose_name="Experience (years)", default=1)
     birthday = models.DateField(verbose_name="Doğum tarixi")
+    image = models.ImageField(upload_to='developers/', blank=True, null=True)
     status = models.BooleanField(default=True, verbose_name="Status")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Yaranma tarixi")
     time_update = models.DateTimeField(auto_now=True, verbose_name="Yenilənmə tarixi")
 
     def __str__(self):
-        return self.name
+        return f"{self.name} {self.surname}"
+
 
 class About_us(models.Model):
     title = models.CharField(max_length=255, verbose_name="Title")
@@ -113,7 +117,31 @@ class About_us(models.Model):
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Time_create", null=True)
     time_update = models.DateTimeField(auto_now=True, verbose_name="Time_update", null=True)
     is_published = models.BooleanField(default=True, verbose_name="Status", null=True)
-    # developer = models.ForeignKey(Developer, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Developer")
 
     def __str__(self):
         return self.title
+    
+
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_processed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Message from {self.name}"
+
+
+
+
+class Testimonial(models.Model):
+    name = models.CharField(max_length=100)
+    position = models.CharField(max_length=100)
+    text = models.TextField()
+    rating = models.PositiveSmallIntegerField(default=5)
+    is_active = models.BooleanField(default=True)
+    
+    def __str__(self):
+        return f"{self.name} - {self.position}"

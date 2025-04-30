@@ -165,3 +165,30 @@ scrollTrigger: {
 });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  const slider = document.querySelector('.testimonial-cards');
+  const cards = document.querySelectorAll('.testimonial-card');
+  const prevBtn = document.querySelector('.slider-control--prev');
+  const nextBtn = document.querySelector('.slider-control--next');
+  
+  let currentIndex = 0;
+  const cardWidth = cards[0].offsetWidth;
+  
+  function updateSlider() {
+    slider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+  }
+  
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < cards.length - 1) {
+      currentIndex++;
+      updateSlider();
+    }
+  });
+  
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateSlider();
+    }
+  });
+});

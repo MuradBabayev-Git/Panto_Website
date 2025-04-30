@@ -15,20 +15,25 @@
 <body>
 
 
-    <header style="background-color: #6e7386;">
-      <h1 class="panto">Panto</h1>
-      <nav>
-        <div class="dropdown">
-          <a href="https://www.ikea.com" target="_blank">Furniture </a>
-          <div class="dropdown-menu"> 
-            <a href="https://www.ikea.com" target="_blank">IKEA</a>
-            <a href="https://www.wayfair.com" target="_blank">Wayfair</a>
-          </div>
+  <header style="background-color: #6e7386;">
+    <h1 class="panto">Panto</h1>
+    <nav>
+      <a href="{% url 'index' %}">Home</a>  <!-- Изменено с Furniture на Home -->
+      
+      <div class="dropdown">
+        <a href="{% url 'all_products' %}">All Products</a>  <!-- Изменено с Shop на All Products -->
+        <div class="dropdown-menu"> 
+          <a href="{% url 'all_products' %}?category=chair">Chairs</a>
+          <a href="{% url 'all_products' %}?category=beds">Beds</a>
+          <a href="{% url 'all_products' %}?category=sofa">Sofas</a>
+          <a href="{% url 'all_products' %}?category=lamp">Lamps</a>
         </div>
-        <a href="https://www.amazon.com" target="_blank">Shop</a>
-        <a href="{% url 'about_us' %}">About Us</a> 
-        <a href="https://www.contactus.com" target="_blank">Contact</a>
-      </nav>
+      </div>
+      
+      <a href="{% url 'about_us' %}">About Us</a> 
+      <a href="{% url 'contact' %}">Contact</a>  <!-- Добавлена новая ссылка -->
+    </nav>           
+  </header>
 
 
       <!-- Side Menu -->
@@ -75,13 +80,13 @@
 </style>
 
 <div class="" >
-  <div class="footer_section">
-    <div class="neznayu">
-      <footer class="footer1">
+  <div class="footer_section" style="background-color: #6E7386;">
+    <div class="neznayu" >
+      <footer class="footer1" style="background-color: #6E7386;">
         <div class="footer-column footer-brand">
           <h2>Panto</h2>
-          <p>The advantage of hiring <br> a workspace with us is that it <br> gives you comfortable service.</p>
-          <p>&copy; 2021</p>
+          <p style="color: #ff8c42!important; ">The advantage of hiring <br> a workspace with us is that it <br> gives you comfortable service.</p>
+          <p style="color: #ff8c42!important; ">&copy; 2021</p>
         </div>
   
         <div class="footer-column">
