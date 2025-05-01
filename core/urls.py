@@ -25,6 +25,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls')),
     path('', views.home, name='home'),
+    path('', include('news.urls')),
+    # path('', include('news_name.urls')),
+
+
 ]
 
 handler404 = pageNotFound

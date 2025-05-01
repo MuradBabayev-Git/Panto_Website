@@ -380,16 +380,16 @@
       <h1 class="panto">Panto</h1>
       <nav>
         <a href="{% url 'index' %}">Home</a> <!-- Изменено с Furniture на Home -->
+        <a href="{% url 'all_products' %}">All Products</a> <!-- Изменено с Shop на All Products -->
+        <!-- <div class="dropdown">
 
-        <div class="dropdown">
-          <a href="{% url 'all_products' %}">All Products</a> <!-- Изменено с Shop на All Products -->
           <div class="dropdown-menu">
             <a href="{% url 'all_products' %}?category=chair">Chairs</a>
             <a href="{% url 'all_products' %}?category=beds">Beds</a>
             <a href="{% url 'all_products' %}?category=sofa">Sofas</a>
             <a href="{% url 'all_products' %}?category=lamp">Lamps</a>
           </div>
-        </div>
+        </div> -->
 
         <a href="{% url 'about_us' %}">About Us</a>
         <a href="{% url 'contact' %}">Contact</a>

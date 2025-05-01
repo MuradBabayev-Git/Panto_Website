@@ -1,8 +1,10 @@
 
+from django.utils import timezone
+from venv import logger
 from django.http import Http404, HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db.models import Count, Q
-from news.models import About_us, Category, ContactMessage, Developer, News, Product, Testimonial
+from news.models import About_us, Category, ContactMessage, Developer, News, Order, Product, Testimonial
 from django.core.mail import send_mail
 
 menu = [
@@ -49,7 +51,8 @@ def best_selling_products(request):
 def index(request):
     # Получаем все активные продукты (не только chair)
     products = Product.objects.filter(status=True)
-    
+    logger.debug(f"Found products: {products}")
+
     context = {
         "title": "Home",
         "menu": menu,
@@ -168,3 +171,30 @@ def contact_success(request):
 def testimonials_view(request):
     testimonials = Testimonial.objects.filter(is_active=True)
     return render(request, 'your_template.html', {'testimonials': testimonials})
+
+
+def create_order(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    
+    if request.method == 'POST':
+        # Create the order
+        order = Order.objects.create(
+            product=product,
+            customer_name=request.POST.get('name'),
+            customer_email=request.POST.get('email'),
+            customer_phone=request.POST.get('phone'),
+            address=request.POST.get('address'),
+            payment_method=request.POST.get('payment_method'),
+            total_price=product.price,
+            order_date=timezone.now()
+        )
+        
+        # Redirect to order confirmation page
+        return redirect('order_confirmation', order_id=order.id)
+    
+    # If GET request, show order form
+    return render(request, 'news/order_form.html', {'product': product})
+
+def order_confirmation(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    return render(request, 'news/order_confirmation.html', {'order': order})

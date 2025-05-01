@@ -1,7 +1,7 @@
 
 from django.urls import path, re_path
 
-from .views import about_us, all_products, best_selling_products, categories_list, categories, contact, contact_success, news_detail, index
+from .views import about_us, all_products, best_selling_products, categories_list, categories, contact, contact_success, create_order, news_detail, index, order_confirmation
 from news import views  
 # from news.views import about, contact, index
 
@@ -17,6 +17,8 @@ urlpatterns = [
     path('about_us/', about_us, name='about_us'),
     path('contact/', contact, name='contact'),
     path('contact/success/', contact_success, name='contact_success'),
+    path('order/create/<int:product_id>/', create_order, name='create_order'),
+    path('order/confirmation/<int:order_id>/', order_confirmation, name='order_confirmation'),
 
 
 
