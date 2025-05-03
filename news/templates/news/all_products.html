@@ -1,88 +1,296 @@
 {% extends 'news/base.html' %}
 {% load static %}
 
-{% block title %}PRODUCTS{% endblock %}
+{% block title %}Our Collection | Panto{% endblock %}
 
 {% block content %}
-<div class="products-page">
-    <!-- Заголовок с чертой -->
-    <div class="title-section">
-        <h1>PRODUCTS</h1>
-        <div class="title-line"></div>
-    </div>
-
-    <!-- Сетка 3 колонки -->
-    <div class="products-grid">
-        {% for product in products %}
-        <a href="{% url 'product_detail' product.id %}" class="product-card">
-            {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-img">
-            {% else %}
-                <div class="no-image">NO IMAGE</div>
-            {% endif %}
-            <div class="product-name">{{ product.name|upper }}</div>
-        </a>
-        {% endfor %}
-    </div>
-</div>
+<!-- GSAP Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 
 <style>
-    /* Жесткий минимализм */
-    .products-page {
-        max-width: 1300px;
-        margin: 0 auto;
-        padding: 50px 20px;
-        font-family: 'Helvetica', sans-serif;
+    /* Font Imports */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+    
+    :root {
+        --luxury-gold: #C6A769;
+        --luxury-dark: #1A1A1A;
+        --luxury-light: #F8F5F0;
+        --luxury-gray: #6D6D6D;
+        --luxury-white: #FFFFFF;
+        --transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
-    .title-section {
-        text-align: center;
-        margin-bottom: 50px;
+    
+    .luxury-products {
+        font-family: 'Poppins', sans-serif;
+        color: var(--luxury-dark);
+        background: var(--luxury-light);
+        overflow-x: hidden;
     }
-    h1 {
-        font-size: 32px;
-        letter-spacing: 3px;
-        margin-bottom: 10px;
-    }
-    .title-line {
-        height: 2px;
-        width: 100px;
-        background: #000;
-        margin: 0 auto;
-    }
-    .products-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 40px;
-    }
-    .product-card {
-        text-decoration: none;
-        color: #000;
-        transition: all 0.3s;
-    }
-    .product-card:hover {
-        opacity: 0.8;
-    }
-    .product-img {
-        width: 100%;
-        /* height: 350px; */
-        object-fit: contain;
-        /* border: 1px solid #000; */
-    }
-    .no-image {
-        width: 100%;
-        height: 350px;
-        background: #f0f0f0;
+    
+    /* Hero Section */
+    .luxury-products-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                    url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+        height: 50vh;
+        min-height: 400px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-weight: bold;
-        border: 1px solid #000;
+        text-align: center;
+        position: relative;
+        margin-bottom: 80px;
     }
-    .product-name {
-        margin-top: 15px;
-        font-size: 14px;
+    
+    .luxury-products-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 4rem;
+        font-weight: 700;
+        color: var(--luxury-white);
+        margin-bottom: 20px;
+        letter-spacing: 3px;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    
+    .luxury-products-title span {
+        color: var(--luxury-gold);
+    }
+    
+    .luxury-title-line {
+        width: 100px;
+        height: 2px;
+        background: var(--luxury-gold);
+        margin: 0 auto;
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: center;
+    }
+    
+    /* Products Grid */
+    .luxury-products-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 30px 100px;
+    }
+    
+    .luxury-products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+        gap: 50px;
+    }
+    
+    .luxury-product-card {
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    
+    .luxury-product-link {
+        text-decoration: none;
+        color: var(--luxury-dark);
+        display: block;
+        transition: var(--transition);
+    }
+    
+    .luxury-product-link:hover {
+        transform: translateY(-10px);
+    }
+    
+    .luxury-product-img-container {
+        position: relative;
+        width: 100%;
+        height: 450px;
+        overflow: hidden;
+        background: var(--luxury-white);
+        margin-bottom: 25px;
+    }
+    
+    .luxury-product-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+    }
+    
+    .luxury-product-link:hover .luxury-product-img {
+        transform: scale(1.05);
+    }
+    
+    .luxury-no-image {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--luxury-white);
+        color: var(--luxury-gray);
+        font-weight: 600;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .luxury-product-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
         text-align: center;
         letter-spacing: 1px;
+        margin-bottom: 10px;
+        transition: var(--transition);
+    }
+    
+    .luxury-product-link:hover .luxury-product-name {
+        color: var(--luxury-gold);
+    }
+    
+    .luxury-product-price {
+        text-align: center;
+        color: var(--luxury-gold);
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+    
+    /* Floating Gold Bar */
+    .luxury-product-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--luxury-gold);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: var(--transition);
+    }
+    
+    .luxury-product-card:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+    
+    @media (max-width: 992px) {
+        .luxury-products-grid {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .luxury-product-img-container {
+            height: 380px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .luxury-products-title {
+            font-size: 2.5rem;
+        }
+        
+        .luxury-products-hero {
+            height: 40vh;
+            min-height: 300px;
+        }
     }
 </style>
+
+<div class="luxury-products">
+    <!-- Hero Section -->
+    <div class="luxury-products-hero" id="products-hero">
+        <div class="luxury-hero-content">
+            <h1 class="luxury-products-title" id="products-title">OUR <span>COLLECTION</span></h1>
+            <div class="luxury-title-line" id="title-line"></div>
+        </div>
+    </div>
+    
+    <!-- Products Grid -->
+    <div class="luxury-products-container">
+        <div class="luxury-products-grid">
+            {% for product in products %}
+            <div class="luxury-product-card" id="product-card-{{ forloop.counter }}">
+                <a href="{% url 'product_detail' product.id %}" class="luxury-product-link">
+                    <div class="luxury-product-img-container">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="luxury-product-img">
+                        {% else %}
+                            <div class="luxury-no-image">NO IMAGE</div>
+                        {% endif %}
+                    </div>
+                    <h3 class="luxury-product-name">{{ product.name|upper }}</h3>
+                    <p class="luxury-product-price">${{ product.price|default:"0.00" }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Hero section animations
+        gsap.to("#products-title", {
+            duration: 1,
+            opacity: 1,
+            y: 0,
+            ease: "power3.out",
+            delay: 0.3
+        });
+        
+        gsap.to("#title-line", {
+            duration: 1,
+            opacity: 1,
+            scaleX: 1,
+            ease: "power3.out",
+            delay: 0.6
+        });
+        
+        // Parallax effect for hero section
+        gsap.to("#products-hero", {
+            scrollTrigger: {
+                trigger: "#products-hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            },
+            y: 100,
+            ease: "none"
+        });
+        
+        // Product cards animations
+        {% for product in products %}
+        gsap.to("#product-card-{{ forloop.counter }}", {
+            scrollTrigger: {
+                trigger: "#product-card-{{ forloop.counter }}",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            },
+            duration: 0.8,
+            opacity: 1,
+            y: 0,
+            ease: "back.out(1.2)",
+            delay: {{ forloop.counter|add:"-1" }} * 0.1
+        });
+        {% endfor %}
+        
+        // Hover effect for all product cards
+        gsap.utils.toArray(".luxury-product-card").forEach(card => {
+            card.addEventListener("mouseenter", () => {
+                gsap.to(card, {
+                    scale: 1.02,
+                    duration: 0.3,
+                    ease: "power1.out"
+                });
+            });
+            
+            card.addEventListener("mouseleave", () => {
+                gsap.to(card, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: "power1.out"
+                });
+            });
+        });
+    });
+</script>
 {% endblock %}

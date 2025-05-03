@@ -1,36 +1,274 @@
 {% extends 'news/base.html' %}
 {% load static %}
 
-{% block title %}{{ product.name|upper }}{% endblock %}
+{% block title %}{{ product.name|upper }} | Panto{% endblock %}
 
 {% block content %}
-<div class="product-detail-page">
-    <!-- Верхняя черта -->
-    <div class="detail-line"></div>
+<!-- GSAP Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 
-    <div class="product-container">
-        <!-- Левая часть: картинка на весь экран -->
-        <div class="product-gallery">
+<style>
+    /* Font Imports */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+    
+    :root {
+        --luxury-gold: #C6A769;
+        --luxury-dark: #1A1A1A;
+        --luxury-light: #F8F5F0;
+        --luxury-gray: #6D6D6D;
+        --luxury-white: #FFFFFF;
+        --transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+    
+    .luxury-product-detail {
+        font-family: 'Poppins', sans-serif;
+        color: var(--luxury-dark);
+        background: var(--luxury-light);
+        overflow-x: hidden;
+    }
+    
+    /* Hero Line */
+    .luxury-detail-line {
+        height: 1px;
+        background: var(--luxury-gold);
+        margin: 50px auto;
+        width: 90%;
+        max-width: 1400px;
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+    
+    /* Product Container */
+    .luxury-product-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 30px 100px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+    }
+    
+    /* Gallery Section */
+    .luxury-product-gallery {
+        position: relative;
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    
+    .luxury-main-image,
+    .luxury-no-image-main {
+        width: 100%;
+        height: 700px;
+        object-fit: contain;
+        transition: var(--transition);
+    }
+    
+    .luxury-no-image-main {
+        background: var(--luxury-white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--luxury-gray);
+        font-weight: 600;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Info Section */
+    .luxury-product-info {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    
+    .luxury-product-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 20px;
+    }
+    
+    .luxury-product-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 80px;
+        height: 2px;
+        background: var(--luxury-gold);
+    }
+    
+    .luxury-product-price {
+        font-size: 1.8rem;
+        color: var(--luxury-gold);
+        font-weight: 600;
+        margin-bottom: 40px;
+    }
+    
+    /* Sections */
+    .luxury-section {
+        margin-bottom: 50px;
+        position: relative;
+    }
+    
+    .luxury-section h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        position: relative;
+    }
+    
+    .luxury-section h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 1px;
+        background: var(--luxury-gold);
+    }
+    
+    .luxury-section p {
+        color: var(--luxury-gray);
+        line-height: 1.8;
+        margin-bottom: 0;
+    }
+    
+    .luxury-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .luxury-section li {
+        margin-bottom: 12px;
+        position: relative;
+        padding-left: 25px;
+        color: var(--luxury-gray);
+    }
+    
+    .luxury-section li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--luxury-gold);
+    }
+    
+    /* Buy Button */
+    .luxury-action-button {
+        display: inline-block;
+        width: 100%;
+        padding: 18px;
+        background: var(--luxury-dark);
+        color: var(--luxury-white);
+        border: none;
+        font-size: 1rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    
+    .luxury-action-button:hover {
+        background: var(--luxury-gold);
+        color: var(--luxury-dark);
+    }
+    
+    .luxury-action-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: var(--transition);
+    }
+    
+    .luxury-action-button:hover::before {
+        left: 100%;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1200px) {
+        .luxury-main-image,
+        .luxury-no-image-main {
+            height: 600px;
+        }
+    }
+    
+    @media (max-width: 992px) {
+        .luxury-product-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        
+        .luxury-main-image,
+        .luxury-no-image-main {
+            height: 500px;
+        }
+        
+        .luxury-product-gallery {
+            border-right: none;
+            padding-right: 0;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .luxury-product-title {
+            font-size: 2rem;
+        }
+        
+        .luxury-main-image,
+        .luxury-no-image-main {
+            height: 400px;
+        }
+    }
+</style>
+
+<div class="luxury-product-detail">
+    <!-- Hero Line -->
+    <div class="luxury-detail-line" id="detail-line"></div>
+    
+    <!-- Product Container -->
+    <div class="luxury-product-container">
+        <!-- Gallery Section -->
+        <div class="luxury-product-gallery" id="product-gallery">
             {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="main-image">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="luxury-main-image" id="main-image">
             {% else %}
-            <div class="no-image-main">NO IMAGE</div>
+                <div class="luxury-no-image-main">NO IMAGE</div>
             {% endif %}
         </div>
-
-        <!-- Правая часть: детали -->
-        <div class="product-info">
-            <h1>{{ product.name|upper }}</h1>
-            <div class="price">${{ product.price }}</div>
-
-            <!-- Описание -->
-            <div class="section">
+        
+        <!-- Info Section -->
+        <div class="luxury-product-info" id="product-info">
+            <h1 class="luxury-product-title">{{ product.name|upper }}</h1>
+            <div class="luxury-product-price">${{ product.price }}</div>
+            
+            <!-- Description -->
+            <div class="luxury-section">
                 <h2>DESCRIPTION</h2>
                 <p>{{ product.description|default:"No description provided." }}</p>
             </div>
-
-            <!-- Характеристики -->
-            <div class="section">
+            
+            <!-- Specifications -->
+            <div class="luxury-section">
                 <h2>SPECS</h2>
                 <ul>
                     <li><strong>CATEGORY:</strong> {{ product.get_category_display|upper }}</li>
@@ -38,103 +276,107 @@
                     <li><strong>SKU:</strong> {{ product.id }}</li>
                 </ul>
             </div>
-
-            <!-- Кнопка -->
-            <!-- Change the button in product_detail.html -->
-            <a href="{% url 'create_order' product.id %}" class="action-button">BUY NOW</a>
+            
+            <!-- Buy Button -->
+            <a href="{% url 'create_order' product.id %}" class="luxury-action-button" id="action-button">BUY NOW</a>
         </div>
     </div>
 </div>
 
-<style>
-    /* Агрессивный стиль */
-    .product-detail-page {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 0 20px 50px;
-    }
-
-    .detail-line {
-        height: 1px;
-        background: #000;
-        margin: 30px 0;
-    }
-
-    .product-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
-    }
-
-    .product-gallery {
-        border-right: 1px solid #000;
-        padding-right: 30px;
-    }
-
-    .main-image,
-    .no-image-main {
-        width: 100%;
-        height: 600px;
-        object-fit: contain;
-    }
-
-    .no-image-main {
-        background: #f0f0f0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        font-weight: bold;
-        border: 1px solid #000;
-    }
-
-    .product-info h1 {
-        font-size: 32px;
-        letter-spacing: 2px;
-        margin-bottom: 10px;
-    }
-
-    .price {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 30px;
-    }
-
-    .section {
-        margin-bottom: 40px;
-    }
-
-    .section h2 {
-        font-size: 18px;
-        letter-spacing: 1px;
-        margin-bottom: 15px;
-        padding-bottom: 5px;
-        border-bottom: 1px solid #000;
-    }
-
-    .section ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .section li {
-        margin-bottom: 8px;
-    }
-
-    .action-button {
-        width: 100%;
-        padding: 15px;
-        background: #000;
-        color: #fff;
-        border: none;
-        font-size: 16px;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: all 0.3s;
-    }
-
-    .action-button:hover {
-        background: #333;
-    }
-</style>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Line animation
+        gsap.to("#detail-line", {
+            duration: 1.5,
+            opacity: 1,
+            scaleX: 1,
+            ease: "power3.out",
+            delay: 0.3
+        });
+        
+        // Gallery animation
+        gsap.to("#product-gallery", {
+            duration: 1,
+            opacity: 1,
+            x: 0,
+            ease: "back.out(1.2)",
+            delay: 0.6
+        });
+        
+        // Info animation
+        gsap.to("#product-info", {
+            duration: 1,
+            opacity: 1,
+            x: 0,
+            ease: "back.out(1.2)",
+            delay: 0.8
+        });
+        
+        // Button animation
+        gsap.to("#action-button", {
+            duration: 0.8,
+            opacity: 1,
+            y: 0,
+            ease: "back.out(1.7)",
+            delay: 1.2
+        });
+        
+        // Image hover effect
+        const mainImage = document.getElementById("main-image");
+        if (mainImage) {
+            mainImage.addEventListener("mouseenter", () => {
+                gsap.to(mainImage, {
+                    scale: 1.03,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            });
+            
+            mainImage.addEventListener("mouseleave", () => {
+                gsap.to(mainImage, {
+                    scale: 1,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            });
+        }
+        
+        // Button hover effect
+        const actionButton = document.getElementById("action-button");
+        actionButton.addEventListener("mouseenter", () => {
+            gsap.to(actionButton, {
+                y: -5,
+                duration: 0.3,
+                ease: "power1.out"
+            });
+        });
+        
+        actionButton.addEventListener("mouseleave", () => {
+            gsap.to(actionButton, {
+                y: 0,
+                duration: 0.3,
+                ease: "power1.out"
+            });
+        });
+        
+        // Section animations on scroll
+        gsap.utils.toArray(".luxury-section").forEach((section, i) => {
+            gsap.to(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out",
+                delay: i * 0.1
+            });
+        });
+    });
+</script>
 {% endblock %}

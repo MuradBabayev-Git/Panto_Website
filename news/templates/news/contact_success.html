@@ -4,239 +4,453 @@
 {% block title %}Message Sent | Panto{% endblock %}
 
 {% block content %}
+<!-- GSAP Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <style>
+    /* Font Imports */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+    
     :root {
-        --primary: #6e7386;
-        --secondary: #4a4e5a;
-        --accent: #ff6b6b;
-        --light: #f8f9fa;
-        --dark: #212529;
+        --luxury-gold: #C6A769;
+        --luxury-dark: #1A1A1A;
+        --luxury-light: #F8F5F0;
+        --luxury-gray: #6D6D6D;
+        --luxury-white: #FFFFFF;
+        --luxury-blue: #6e7386;
+        --luxury-red: #ff6b6b;
+        --transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
     
-    .success-wrapper {
+    .luxury-message-confirmation {
+        font-family: 'Poppins', sans-serif;
+        color: var(--luxury-dark);
+        background: var(--luxury-light);
         min-height: 100vh;
         display: flex;
-        flex-direction: column;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    }
-    
-    .success-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 4rem 2rem;
-        text-align: center;
-    }
-    
-    .success-card {
-        background: white;
-        border-radius: 1.5rem;
-        box-shadow: 0 1rem 3rem rgba(0,0,0,0.1);
-        padding: 3rem;
-        max-width: 600px;
-        width: 100%;
+        padding: 80px 30px;
         position: relative;
         overflow: hidden;
-        margin-bottom: 3rem;
     }
     
-    .success-card::before {
+    /* Confetti Canvas */
+    .confetti-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+    
+    /* Confirmation Card */
+    .luxury-confirmation-card {
+        background: var(--luxury-white);
+        border-radius: 20px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        padding: 60px;
+        max-width: 700px;
+        width: 100%;
+        position: relative;
+        z-index: 2;
+        opacity: 0;
+        transform: translateY(50px);
+        overflow: hidden;
+    }
+    
+    .luxury-confirmation-card::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: 0.5rem;
-        background: linear-gradient(90deg, var(--accent), var(--primary));
+        height: 8px;
+        background: linear-gradient(90deg, var(--luxury-red), var(--luxury-blue));
     }
     
-    .success-icon {
-        width: 6rem;
-        height: 6rem;
-        margin: 0 auto 2rem;
+    /* Confirmation Icon */
+    .luxury-confirmation-icon {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, var(--luxury-red), var(--luxury-gold));
+        border-radius: 50%;
+        margin: 0 auto 30px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(135deg, var(--accent), var(--primary));
-        border-radius: 50%;
-        color: white;
-        font-size: 3rem;
-        box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+        color: var(--luxury-white);
+        font-size: 48px;
+        box-shadow: 0 15px 30px rgba(255, 107, 107, 0.3);
+        transform: scale(0);
     }
     
-    .success-title {
-        font-size: 2.2rem;
-        color: var(--dark);
-        margin-bottom: 1.5rem;
-        font-weight: 700;
-        letter-spacing: -0.5px;
+    /* Confirmation Title */
+    .luxury-confirmation-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--luxury-dark);
+        opacity: 0;
+        transform: translateY(20px);
     }
     
-    .success-message {
-        font-size: 1.1rem;
-        color: var(--secondary);
-        margin-bottom: 2.5rem;
-        line-height: 1.6;
+    /* Confirmation Message */
+    .luxury-confirmation-message {
+        font-size: 1.2rem;
+        text-align: center;
+        color: var(--luxury-gray);
+        margin-bottom: 40px;
+        line-height: 1.8;
+        opacity: 0;
+        transform: translateY(20px);
     }
     
-    .success-buttons {
+    /* Buttons */
+    .luxury-confirmation-buttons {
         display: flex;
-        gap: 1rem;
+        gap: 20px;
         justify-content: center;
         flex-wrap: wrap;
     }
     
-    .success-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.8rem 2rem;
-        border-radius: 2rem;
+    .luxury-confirmation-btn {
+        padding: 18px 36px;
+        border-radius: 50px;
         font-weight: 600;
         text-decoration: none;
-        transition: all 0.3s ease;
-        min-width: 180px;
+        text-align: center;
+        transition: var(--transition);
+        min-width: 200px;
+        opacity: 0;
+        transform: translateY(20px);
     }
     
-    .btn-primary {
-        background: var(--primary);
-        color: white;
-        box-shadow: 0 0.25rem 0.75rem rgba(110, 115, 134, 0.3);
+    .luxury-btn-primary {
+        background: var(--luxury-blue);
+        color: var(--luxury-white);
+        box-shadow: 0 10px 20px rgba(110, 115, 134, 0.2);
     }
     
-    .btn-outline {
-        border: 2px solid var(--primary);
-        color: var(--primary);
+    .luxury-btn-outline {
+        border: 2px solid var(--luxury-blue);
+        color: var(--luxury-blue);
         background: transparent;
     }
     
-    .btn-primary:hover {
-        background: var(--secondary);
-        transform: translateY(-2px);
-        box-shadow: 0 0.5rem 1rem rgba(110, 115, 134, 0.4);
+    .luxury-btn-primary:hover {
+        background: var(--luxury-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(110, 115, 134, 0.3);
     }
     
-    .btn-outline:hover {
-        background: var(--primary);
-        color: white;
-        transform: translateY(-2px);
+    .luxury-btn-outline:hover {
+        background: var(--luxury-blue);
+        color: var(--luxury-white);
+        transform: translateY(-3px);
     }
     
-    .footer {
-        background: var(--dark);
-        color: white;
-        padding: 3rem 2rem;
-        text-align: center;
+    /* Footer */
+    .luxury-footer {
+        background: var(--luxury-dark);
+        color: var(--luxury-white);
+        padding: 60px 30px;
+        position: relative;
+        z-index: 2;
     }
     
-    .footer-content {
+    .luxury-footer-content {
         max-width: 1200px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 2rem;
-        text-align: left;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
     }
     
-    .footer-logo {
+    .luxury-footer-logo {
+        font-family: 'Playfair Display', serif;
         font-size: 1.8rem;
         font-weight: 700;
-        margin-bottom: 1rem;
-        color: white;
+        margin-bottom: 20px;
+        color: var(--luxury-white);
     }
     
-    .footer-description {
-        color: rgba(255,255,255,0.7);
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
+    .luxury-footer-description {
+        color: var(--luxury-gray);
+        line-height: 1.8;
+        margin-bottom: 20px;
     }
     
-    .footer-heading {
-        font-size: 1.2rem;
+    .luxury-footer-heading {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
         font-weight: 600;
-        margin-bottom: 1.5rem;
-        color: white;
+        margin-bottom: 20px;
+        color: var(--luxury-white);
     }
     
-    .footer-links {
+    .luxury-footer-links {
         list-style: none;
         padding: 0;
+        margin: 0;
     }
     
-    .footer-links li {
-        margin-bottom: 0.8rem;
+    .luxury-footer-links li {
+        margin-bottom: 15px;
     }
     
-    .footer-links a {
-        color: rgba(255,255,255,0.7);
+    .luxury-footer-links a {
+        color: var(--luxury-gray);
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: var(--transition);
     }
     
-    .footer-links a:hover {
-        color: white;
+    .luxury-footer-links a:hover {
+        color: var(--luxury-white);
+        padding-left: 5px;
     }
     
-    .copyright {
-        margin-top: 3rem;
-        padding-top: 2rem;
+    .luxury-copyright {
+        margin-top: 60px;
+        padding-top: 30px;
         border-top: 1px solid rgba(255,255,255,0.1);
-        color: rgba(255,255,255,0.5);
+        color: var(--luxury-gray);
         font-size: 0.9rem;
+        text-align: center;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+        .luxury-confirmation-card {
+            padding: 40px;
+        }
+        
+        .luxury-confirmation-title {
+            font-size: 2.2rem;
+        }
     }
     
     @media (max-width: 768px) {
-        .success-card {
-            padding: 2rem 1.5rem;
+        .luxury-message-confirmation {
+            padding: 60px 20px;
         }
         
-        .success-title {
+        .luxury-confirmation-card {
+            padding: 30px 20px;
+        }
+        
+        .luxury-confirmation-icon {
+            width: 80px;
+            height: 80px;
+            font-size: 36px;
+        }
+        
+        .luxury-confirmation-title {
             font-size: 1.8rem;
         }
         
-        .success-buttons {
-            flex-direction: column;
-            gap: 1rem;
+        .luxury-confirmation-message {
+            font-size: 1rem;
         }
         
-        .success-btn {
+        .luxury-confirmation-buttons {
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .luxury-confirmation-btn {
             width: 100%;
+        }
+        
+        .luxury-footer-content {
+            grid-template-columns: 1fr;
         }
     }
 </style>
 
-<div class="success-wrapper">
-    <div class="success-container">
-        <div class="success-card">
-            <div class="success-icon">✓</div>
-            <h1 class="success-title">Thank You!</h1>
-            <p class="success-message">
-                Your message has been sent successfully.<br>
-                Our team will contact you within 24 hours.
+<div class="luxury-message-confirmation">
+    <!-- Confetti Canvas -->
+    <canvas class="confetti-canvas"></canvas>
+    
+    <!-- Confirmation Card -->
+    <div class="luxury-confirmation-card" id="confirmation-card">
+        <div class="luxury-confirmation-icon" id="confirmation-icon">✓</div>
+        <h1 class="luxury-confirmation-title" id="confirmation-title">Thank You!</h1>
+        <p class="luxury-confirmation-message" id="confirmation-message">
+            Your message has been sent successfully.<br>
+            Our team will contact you within 24 hours.
+        </p>
+        
+        <div class="luxury-confirmation-buttons">
+            <a href="{% url 'index' %}" class="luxury-confirmation-btn luxury-btn-primary" id="home-btn">Back to Home</a>
+            <a href="{% url 'contact' %}" class="luxury-confirmation-btn luxury-btn-outline" id="contact-btn">Send Another Message</a>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<!-- <footer class="luxury-footer">
+    <div class="luxury-footer-content">
+        <div class="luxury-footer-about">
+            <div class="luxury-footer-logo">PANTO</div>
+            <p class="luxury-footer-description">
+                Luxury furniture and home accessories crafted with passion and attention to detail.
             </p>
-            <div class="success-buttons">
-                <a href="{% url 'index' %}" class="success-btn btn-primary">Back to Home</a>
-                <a href="{% url 'contact' %}" class="success-btn btn-outline">Send Another Message</a>
-            </div>
+        </div>
+        
+        <div class="luxury-footer-links">
+            <h3 class="luxury-footer-heading">Quick Links</h3>
+            <ul class="luxury-footer-links">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'all_products' %}">Products</a></li>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </div>
+        
+        <div class="luxury-footer-contact">
+            <h3 class="luxury-footer-heading">Contact Us</h3>
+            <ul class="luxury-footer-links">
+                <li>123 Luxury Avenue, Baku</li>
+                <li>+994 12 345 6789</li>
+                <li>info@panto-luxury.com</li>
+            </ul>
         </div>
     </div>
     
-
+    <div class="luxury-copyright">
+        &copy; 2023 PANTO Luxury Furniture. All rights reserved.
+    </div>
+</footer> -->
 
 <script>
-    // Анимация иконки успеха
-    document.addEventListener('DOMContentLoaded', function() {
-        const icon = document.querySelector('.success-icon');
-        icon.style.transform = 'scale(0)';
-        icon.style.opacity = '0';
+    document.addEventListener('DOMContentLoaded', () => {
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Card animation
+        gsap.to("#confirmation-card", {
+            duration: 1,
+            opacity: 1,
+            y: 0,
+            ease: "power3.out"
+        });
+        
+        // Icon animation
+        gsap.to("#confirmation-icon", {
+            duration: 0.8,
+            scale: 1,
+            ease: "back.out(1.7)",
+            delay: 0.3
+        });
+        
+        // Title animation
+        gsap.to("#confirmation-title", {
+            duration: 0.8,
+            opacity: 1,
+            y: 0,
+            ease: "power3.out",
+            delay: 0.6
+        });
+        
+        // Message animation
+        gsap.to("#confirmation-message", {
+            duration: 0.8,
+            opacity: 1,
+            y: 0,
+            ease: "power3.out",
+            delay: 0.8
+        });
+        
+        // Buttons animation
+        gsap.to("#home-btn", {
+            duration: 0.8,
+            opacity: 1,
+            y: 0,
+            ease: "back.out(1.7)",
+            delay: 1.0
+        });
+        
+        gsap.to("#contact-btn", {
+            duration: 0.8,
+            opacity: 1,
+            y: 0,
+            ease: "back.out(1.7)",
+            delay: 1.2
+        });
+        
+        // Confetti animation
+        const confettiCanvas = document.querySelector('.confetti-canvas');
+        const confettiSettings = {
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#C6A769', '#6e7386', '#ff6b6b', '#FFFFFF']
+        };
         
         setTimeout(() => {
-            icon.style.transition = 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-            icon.style.transform = 'scale(1)';
-            icon.style.opacity = '1';
-        }, 100);
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+            
+            const confettiCtx = confettiCanvas.getContext('2d');
+            confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            
+            // Launch confetti
+            confetti({
+                ...confettiSettings,
+                angle: 60,
+                spread: 55
+            });
+            
+            confetti({
+                ...confettiSettings,
+                angle: 120,
+                spread: 55
+            });
+        }, 1000);
+        
+        // Button hover effects
+        gsap.utils.toArray(".luxury-confirmation-btn").forEach(btn => {
+            btn.addEventListener("mouseenter", () => {
+                gsap.to(btn, {
+                    y: -3,
+                    duration: 0.3,
+                    ease: "power1.out"
+                });
+            });
+            
+            btn.addEventListener("mouseleave", () => {
+                gsap.to(btn, {
+                    y: 0,
+                    duration: 0.3,
+                    ease: "power1.out"
+                });
+            });
+        });
+        
+        // Footer links animation
+        gsap.utils.toArray(".luxury-footer-links a").forEach((link, i) => {
+            link.style.opacity = "0";
+            link.style.transform = "translateY(10px)";
+            
+            gsap.to(link, {
+                scrollTrigger: {
+                    trigger: ".luxury-footer",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                duration: 0.5,
+                opacity: 1,
+                y: 0,
+                ease: "power2.out",
+                delay: i * 0.1
+            });
+        });
     });
 </script>
 {% endblock %}
