@@ -60,6 +60,7 @@
     
     /* Product Summary */
     .luxury-product-summary {
+    
         background: var(--luxury-white);
         padding: 40px;
         margin-bottom: 50px;
@@ -69,6 +70,11 @@
         transform: translateY(30px);
         position: relative;
         overflow: hidden;
+    }
+    .Sect00001212102010210212{
+        min-width: 200px;
+        /* background-color: red; */
+        height: initial;
     }
     
     .luxury-product-summary::before {
@@ -255,6 +261,16 @@
     align-items: center;
     display: flex;
 }
+
+.Sect000012121{
+    width: 100%;
+    min-height: 50px;
+    /* background-color: red; */
+    /* float: left; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 </style>
 
 <div class="luxury-order-container">
@@ -264,17 +280,19 @@
     </div>
     
     <!-- Product Summary -->
-    <div class="luxury-product-summary sdsd" id="product-summary">
-        <h2>{{ product.name }}</h2>
-        <div class="luxury-product-img-container">
-            {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="luxury-product-img">
-            {% else %}
-                <div class="luxury-no-image">NO IMAGE</div>
-            {% endif %}
+    <section class="Sect000012121   ">
+        <div class="luxury-product-summary sdsd Sect00001212102010210212" id="product-summary">
+            <h2>{{ product.name }}</h2>
+            <div class="luxury-product-img-container">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="luxury-product-img">
+                {% else %}
+                    <div class="luxury-no-image">NO IMAGE</div>
+                {% endif %}
+            </div>
+            <p>Price: ${{ product.price }}</p>
         </div>
-        <p>Price: ${{ product.price }}</p>
-    </div>
+    </section>
     
     <!-- Order Form -->
     <form method="post" class="luxury-order-form" id="order-form">

@@ -15,7 +15,7 @@
 <body>
 
 
-  <header style="background-color: #6e7386;">
+  <header style="background-color: #6e7386;   position: relative;">
     <h1 class="panto">Panto</h1>
     <nav>
       <a href="{% url 'index' %}">Home</a>  <!-- Изменено с Furniture на Home -->
@@ -32,30 +32,15 @@
       <a href="{% url 'about_us' %}">About Us</a> 
       <a href="{% url 'contact' %}">Contact</a>  <!-- Добавлена новая ссылка -->
     </nav>           
+    <div class="cart">
+      <a href="https://www.ebay.com" target="_blank">
+        <div class="cart-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Cart Icon" width="20" height="20">
+        </div>
+      </a>
+      <div class="cart-count">0</div>
+    </div>
   </header>
-
-
-      <!-- Side Menu -->
-      <div class="side-menu visible001">
-        <nav>
-          <ul>
-            <li><a href="#">Furniture</a></li>
-            <li><a href="https://www.amazon.com" target="_blank">Shop</a></li>
-            <li><a href="https://en.wikipedia.org/wiki/About_us" target="_blank">About Us</a></li>
-            <li><a href="https://www.contactus.com" target="_blank">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-
-      <div class="cart">
-        <a href="https://www.ebay.com" target="_blank">
-          <div class="cart-icon">
-            <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Cart Icon" width="20" height="20">
-          </div>
-        </a>
-        <div class="cart-count">0</div>
-      </div>
-    </header>
 
 
 
