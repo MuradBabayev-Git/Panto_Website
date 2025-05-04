@@ -136,7 +136,7 @@ class ContactMessage(models.Model):
 
 
 
-class Testimonial(models.Model):
+class Testimonial(models.Model):    
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     text = models.TextField()
